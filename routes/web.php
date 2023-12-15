@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminDashboardComponent;
 use App\Livewire\CartComponent;
+use App\Livewire\CategoryComponent;
 use App\Livewire\CheckoutComponent;
 use App\Livewire\DetailsComponent;
 use App\Livewire\HomeComponent;
@@ -34,6 +35,8 @@ Route::get("/product/{slug}", DetailsComponent::class)->name("product.details");
 Route::get("/cart", CartComponent::class)->name("shop.cart");
 
 Route::get("/checkout", CheckoutComponent::class)->name("shop.checkout");
+
+Route::get('/product-category/{slug}', CategoryComponent::class)->name('product.category');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
