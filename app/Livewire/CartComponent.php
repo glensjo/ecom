@@ -13,6 +13,7 @@ class CartComponent extends Component
         $qty = $product->qty + 1;
         Cart::update($rowId, $qty);
         // $this->emitTo('cart-icon-component','refreshComponent');
+        return redirect('/cart');
     }
 
     public function decreaseQuantity($rowId)
@@ -21,6 +22,7 @@ class CartComponent extends Component
         $qty = $product->qty - 1;
         Cart::update($rowId, $qty);
         // $this->emitTo('cart-icon-component','refreshComponent');
+        return redirect('/cart');
     }
 
     public function destroy($id)
@@ -28,12 +30,14 @@ class CartComponent extends Component
         Cart::remove($id);
         // $this->emitTo('cart-icon-component','refreshComponent');
         session()->flash("success_message","Item has been removed!");
+        return redirect('/cart');
     }
 
     public function clearAll()
     {
         Cart::destroy();   
-        // $this->emitTo('cart-icon-component','refreshComponent');     
+        // $this->emitTo('cart-icon-component','refreshComponent');  
+        return redirect('/cart');   
     }
 
     public function render()
