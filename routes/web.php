@@ -7,6 +7,7 @@ use App\Livewire\CategoryComponent;
 use App\Livewire\CheckoutComponent;
 use App\Livewire\DetailsComponent;
 use App\Livewire\HomeComponent;
+use App\Livewire\SearchComponent;
 use App\Livewire\ShopComponent;
 use App\Livewire\User\UserDashboardComponent;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,8 @@ Route::get("/cart", CartComponent::class)->name("shop.cart");
 Route::get("/checkout", CheckoutComponent::class)->name("shop.checkout");
 
 Route::get('/product-category/{slug}', CategoryComponent::class)->name('product.category');
+
+Route::get("/search", SearchComponent::class)->name("product.search");
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
