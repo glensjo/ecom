@@ -14,6 +14,8 @@ class CategoryComponent extends Component
 
     public $pageSize = 12;
     public $orderBy = "Default Sorting";
+    public $min_value = 0;
+    public $max_value = 1000;
     public $slug;
 
     public function store($product_id, $product_name,$product_price)

@@ -11,11 +11,20 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow">Home</a>
+                    <a href="/" rel="nofollow">Home</a>
                     <span></span> Shop
                 </div>
             </div>
         </div>
+        @auth                                        
+            
+        @else
+            <div class="container">
+                <div class="toggle_info">
+                    <span><i class="fi-rs-user mr-10"></i><span class="text-muted">Already have an account?</span> <a href="{{ route('login') }}">Click here to login</a></span>
+                </div>
+            </div>      
+        @endauth
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row">
@@ -96,11 +105,17 @@
                                             </div>
                                             <div class="product-price">
                                                 <span>${{$product->regular_price}} </span>
-                                                {{-- <span class="old-price">$245.8</span> --}}
                                             </div>
-                                            <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
-                                            </div>
+                                            @auth                                        
+                                                <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
+                                            @else
+                                                <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="{{ route('login') }}"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>      
+                                            @endauth
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -109,16 +124,6 @@
                         <!--pagination-->
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             {{$products->links()}}
-                            {{-- <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-start">
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">16</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
-                                </ul>
-                            </nav> --}}
                         </div>
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
@@ -184,50 +189,20 @@
                                 <h5 class="widget-title mb-10">New products</h5>
                                 <div class="bt-1 border-color-1"></div>
                             </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ asset('assets/imgs/shop/thumbnail-3.jpg') }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h5><a href="product-details.html">Chen Cardigan</a></h5>
-                                    <p class="price mb-0 mt-5">$99.50</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:90%"></div>
+                            @foreach ($nproducts as $nproduct)
+                                <div class="single-post clearfix">
+                                    <div class="image">
+                                        <img src="{{ asset('assets/imgs/shop/product-') }}{{$nproduct->id}}-1.jpg" alt="{{$nproduct->name}}">
+                                    </div>
+                                    <div class="content pt-10">
+                                        <h5><a href="{{ route('product.details',['slug'=>$nproduct->slug]) }}">{{$nproduct->name}}</a></h5>
+                                        <p class="price mb-0 mt-5">${{$nproduct->regular_price}}</p>
+                                        <div class="product-rate">
+                                            <div class="product-rating" style="width:90%"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ asset('assets/imgs/shop/thumbnail-4.jpg') }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h6><a href="product-details.html">Chen Sweater</a></h6>
-                                    <p class="price mb-0 mt-5">$89.50</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:80%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ asset('assets/imgs/shop/thumbnail-5.jpg') }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h6><a href="product-details.html">Colorful Jacket</a></h6>
-                                    <p class="price mb-0 mt-5">$25</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:60%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
-                            <img src="{{ asset('assets/imgs/banner/banner-11.jpg') }}" alt="">
-                            <div class="banner-text">
-                                <span>Women Zone</span>
-                                <h4>Save 17% on <br>Office Dress</h4>
-                                <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

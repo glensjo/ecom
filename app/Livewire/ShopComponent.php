@@ -35,6 +35,7 @@ class ShopComponent extends Component
 
     public function render()
     {
+        $nproducts = Product::latest()->take(4)->get();
         if($this->orderBy == 'Price: Low to High') 
         {
             $products = Product::whereBetween('regular_price',[$this->min_value,$this->max_value])->orderBy('regular_price', 'ASC')->paginate($this->pageSize);
@@ -52,6 +53,6 @@ class ShopComponent extends Component
             $products = Product::whereBetween('regular_price',[$this->min_value,$this->max_value])->paginate($this->pageSize);
         }
         $categories = Category::orderBy('name','ASC')->get(); 
-        return view('livewire.shop-component',['products'=>$products, 'categories'=>$categories]);
+        return view('livewire.shop-component',['products'=>$products, 'categories'=>$categories, 'nproducts'=>$nproducts]);
     }
 }
