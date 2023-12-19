@@ -11,15 +11,26 @@ class AdminCategoriesComponent extends Component
     public $category_id;
 
     use WithPagination;
-
+    // public function mount($category_id)
+    // {
+    //     $this->category_id = $category_id;
+    // }
     public function deleteCategory()
     {
         $category = Category::find($this->category_id);
         $category->delete();
         session()->flash("message","Category has been deleted successfully!");
     }
-    
-    
+    // public function deleteCategory()
+    // {
+        
+    //     $category = Category::find($this->category_id);
+    //     dd($category); // Check if the category is found
+
+    //     $category->delete();
+    //     session()->flash("message", "Category has been deleted successfully!");
+    // }
+
     public function render()
     {
         $categories = Category::orderBy('name','ASC')->paginate(5); 

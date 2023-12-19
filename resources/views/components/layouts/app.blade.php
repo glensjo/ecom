@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-<title>Surfside Media</title>
+<title>Cigem Creative</title>
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +14,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{asset ('assets/imgs/theme/favicon.ico') }}">
 <link rel="stylesheet" href="{{asset ('assets/css/main.css') }}">
 <link rel="stylesheet" href="{{asset ('assets/css/custom.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css" rel="stylesheet">
 @livewireStyles
 </head>
 
@@ -110,7 +111,7 @@
                                     @auth                                        
                                         @if (Auth::user()->utype == 'ADM')
                                                 <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                                <li><a href="#">Products</a></li>
+                                                <li><a href="{{ route('admin.products') }}">Products</a></li>
                                                 <li><a href="{{ route('admin.categories') }}">Categories</a></li>
                                                 <li><a href="#">Orders</a></li>
                                                 <li><a href="#">Customers</a></li> 
@@ -339,6 +340,7 @@
 <script src="{{ asset('assets/js/plugins/jquery.vticker-min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery.theia.sticky.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery.elevatezoom.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.all.min.js"></script>
 <!-- Template  JS -->
 <script src="{{ asset('assets/js/main.js?v=3.3') }}"></script>
 <script src="{{ asset('assets/js/shop.js?v=3.3') }}"></script>

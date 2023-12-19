@@ -45,6 +45,9 @@
                                 <div class="mb-3 mt-3">
                                     <label for="slug" class="form-label">Slug</label>
                                     <input type="text" name="slug" class="form-control" placeholder="Enter Category Slug" wire:model="slug">
+                                    @error('slug')
+                                        <p class="text-danger">{{$message}} </p>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary float-end">Submit</button>
                             </form>

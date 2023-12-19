@@ -21,25 +21,13 @@
                                         <!-- MAIN SLIDES -->
                                         <div class="product-image-slider">
                                             <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-2.jpg" alt="product image">
+                                                <img src="{{ asset('assets/imgs/products') }}/{{$product->image}}" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
                                                 <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-1.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
                                                 <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-3.jpg" alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-4.jpg" alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-5.jpg" alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-6.jpg" alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-7.jpg" alt="product image">
                                             </figure>
                                         </div>
                                         <!-- THUMBNAILS -->
