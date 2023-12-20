@@ -1,3 +1,3 @@
 <div>
-    USERRR
+    Hi, {{ Auth::user()->name }}
 </div>

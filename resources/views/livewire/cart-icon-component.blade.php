@@ -1,6 +1,6 @@
 <div class="header-action-icon-2">
-    <a class="mini-cart-icon" href="{{route('shop.cart')}}">
-        <img alt="Surfside Media" src="assets/imgs/theme/icons/icon-cart.svg">
+    <a class="mini-cart-icon" href="{{ route('shop.cart') }}">
+        <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
         @if (Cart::count()>0)
             <span class="pro-count blue">{{Cart::count()}}</span>
         @endif
@@ -11,7 +11,7 @@
                 @foreach (Cart::content() as $item)
                     <li>
                         <div class="shopping-cart-img">
-                            <a href="{{ route('product.details',['slug'=>$item->model->slug]) }}"><img alt="{{$item->model->name}}" src="{{ asset('assets/imgs/products') }}/{{$product->image}}"></a>
+                            <a href="{{ route('product.details',['slug'=>$item->model->slug]) }}"><img alt="{{$item->model->name}}" src="{{ asset('assets/imgs/products') }}/{{$item->model->image}}"></a>
                         </div>
                         <div class="shopping-cart-title">
                             <h4><a href="{{ route('product.details',['slug'=>$item->model->slug]) }}">{{ substr($item->model->name,0,20) }}...</a></h4>

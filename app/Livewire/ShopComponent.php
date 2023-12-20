@@ -14,7 +14,7 @@ class ShopComponent extends Component
     public $pageSize = 12;
     public $orderBy = "Default Sorting";
     public $min_value = 0;
-    public $max_value = 1000;
+    public $max_value = 250000;
 
     public function store($product_id,$product_name,$product_price)
     {
@@ -33,9 +33,17 @@ class ShopComponent extends Component
         $this->orderBy = $order;
     }
 
+    
+
     public function render()
     {
-        $nproducts = Product::latest()->take(4)->get();
+        $products = Product::with('category')->get();
+
+        foreach ($products as $product) {
+            $categoryName = $product->category->name;
+            $categorySlug = $product->category->slug;
+        }
+        
         if($this->orderBy == 'Price: Low to High') 
         {
             $products = Product::whereBetween('regular_price',[$this->min_value,$this->max_value])->orderBy('regular_price', 'ASC')->paginate($this->pageSize);
@@ -53,6 +61,6 @@ class ShopComponent extends Component
             $products = Product::whereBetween('regular_price',[$this->min_value,$this->max_value])->paginate($this->pageSize);
         }
         $categories = Category::orderBy('name','ASC')->get(); 
-        return view('livewire.shop-component',['products'=>$products, 'categories'=>$categories, 'nproducts'=>$nproducts]);
+        return view('livewire.shop-component',['products'=>$products, 'categories'=>$categories]);
     }
 }

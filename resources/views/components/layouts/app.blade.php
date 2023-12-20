@@ -11,7 +11,7 @@
 <meta property="og:type" content="">
 <meta property="og:url" content="">
 <meta property="og:image" content="">
-<link rel="shortcut icon" type="image/x-icon" href="{{asset ('assets/imgs/theme/favicon.ico') }}">
+<link rel="shortcut icon" type="image/x-icon" href="{{asset ('assets/imgs/theme/icon.png') }}">
 <link rel="stylesheet" href="{{asset ('assets/css/main.css') }}">
 <link rel="stylesheet" href="{{asset ('assets/css/custom.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css" rel="stylesheet">
@@ -27,12 +27,7 @@
                         <div class="header-info">
                         <ul>
                                 <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                                    <ul class="language-dropdown">
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-fr.png" alt="">Français</a></li>
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
-                                    </ul>
+                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>                                    
                                 </li>                                
                             </ul>
                         </div>
@@ -41,9 +36,8 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
-                                    <li>Get great devices up to 50% off <a href="{{ route('shop') }}">View details</a></li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="{{ route('shop') }}">Shop now</a></li>
+                                    <li>Get great quality convection things <a href="{{ route('shop') }}">View details</a></li>
+                                    <li>High Quality of Merchandise and Printing  <a href="{{ route('shop') }}">Shop now</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -79,13 +73,7 @@
                     <div class="header-right">
                         @livewire('header-search-component')
                         <div class="header-action-right">
-                            <div class="header-action-2">
-                                <div class="header-action-icon-2">
-                                    <a href="shop-wishlist.php">
-                                        <img class="svgInject" alt="Surfside Media" src="assets/imgs/theme/icons/icon-heart.svg">
-                                        <span class="pro-count blue">4</span>
-                                    </a>
-                                </div>
+                            <div class="header-action-2">                                
                                 @livewire('cart-icon-component')
                             </div>
                         </div>
@@ -97,7 +85,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="assets/imgs/logo/logo.png" alt="logo"></a>
+                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
@@ -122,19 +110,10 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div>
-                    <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
-                    </div>
+                    </div>                                                                                                                                                                                                                    
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2">
-                                <a href="shop-wishlist.php">
-                                    <img alt="Surfside Media" src="assets/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">4</span>
-                                </a>
-                            </div>
                             @livewire('cart-icon-component')
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
@@ -153,7 +132,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="assets/imgs/logo/logo.png" alt="logo"></a>
+                    <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -173,7 +152,7 @@
                     <nav>
                         <ul class="mobile-menu">
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('shop') }}">shop</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('shop') }}">Shop</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog.html">Blog</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
                                 <ul class="dropdown">
@@ -183,6 +162,15 @@
                                     <li><a href="#">Spanish</a></li>
                                 </ul>
                             </li>
+                            @auth                                        
+                                @if (Auth::user()->utype == 'ADM')
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.products') }}">Products</a></li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.categories') }}">Categories</a></li>                                    
+                                @else
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('user.dashboard') }}">Dashboard</a></li>                                                                             
+                                @endif 
+                            @endauth 
                         </ul>
                     </nav>
                 </div>
@@ -204,18 +192,15 @@
                         <div class="single-mobile-header-info">                        
                             <a href="{{ route('register') }}">Sign Up</a>
                         </div>
-                    @endif
+                    @endif                    
                     <div class="single-mobile-header-info">
                         <a href="#">(+1) 0000-000-000 </a>
                     </div>
                 </div>
                 <div class="mobile-social-icon">
                     <h5 class="mb-15 text-grey-4">Follow Us</h5>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                    <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
+                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>
                 </div>
             </div>
         </div>
@@ -230,7 +215,7 @@
                     <div class="col-lg-7 mb-md-3 mb-lg-0">
                         <div class="row align-items-center">
                             <div class="col flex-horizontal-center">
-                                <img class="icon-email" src="assets/imgs/theme/icons/icon-email.svg" alt="">
+                                <img class="icon-email" src="{{ asset('assets/imgs/theme/icons/icon-email.svg') }}" alt="">
                                 <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
                             </div>
                             <div class="col my-4 my-md-0 des">
@@ -255,48 +240,27 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="assets/imgs/logo/logo.png" alt="logo"></a>
+                                <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Address: </strong>562 Wellington Road
+                                <strong>Address: </strong>Toko Bangunan Pusaka / Konveksi,
+                                Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2,
+                                Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan,
+                                Daerah Khusus Ibukota Jakarta 12320
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Phone: </strong>+1 0000-000-000
+                                <strong>Phone: </strong>+62 852-8157-3272
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Email: </strong>contact@surfsidemedia.in
+                                <strong>Email: </strong>cigem.creative@gmail.com
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
-                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">                                
+                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
+                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>                                
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3"></div>
-                    <div class="col-lg-3 col-md-3">
-                        <h5 class="widget-title wow fadeIn animated">About</h5>
-                        <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>                            
-                        </ul>
-                    </div>
-                    <div class="col-lg-3  col-md-3">
-                        <h5 class="widget-title wow fadeIn animated">My Account</h5>
-                        <ul class="footer-list wow fadeIn animated">
-                            <li><a href="my-account.html">My Account</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>                            
-                            <li><a href="#">Order</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
