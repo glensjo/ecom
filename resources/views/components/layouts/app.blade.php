@@ -192,10 +192,7 @@
                         <div class="single-mobile-header-info">                        
                             <a href="{{ route('register') }}">Sign Up</a>
                         </div>
-                    @endif                    
-                    <div class="single-mobile-header-info">
-                        <a href="#">(+1) 0000-000-000 </a>
-                    </div>
+                    @endif
                 </div>
                 <div class="mobile-social-icon">
                     <h5 class="mb-15 text-grey-4">Follow Us</h5>
