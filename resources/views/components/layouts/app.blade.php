@@ -237,17 +237,17 @@
         <section class="section-padding footer-mid">
             <div class="container pt-15 pb-20">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
                                 <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                             </div>
-                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact Us</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Address: </strong>Toko Bangunan Pusaka / Konveksi,
-                                Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2,
-                                Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan,
-                                Daerah Khusus Ibukota Jakarta 12320
+                                <strong>Address: </strong>Toko Bangunan Pusaka / Konveksi, <br>
+                                Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2, <br>
+                                Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan, <br>
+                                Daerah Khusus Ibukota Jakarta 12320 
                             </p>
                             <p class="wow fadeIn animated">
                                 <strong>Phone: </strong>+62 852-8157-3272

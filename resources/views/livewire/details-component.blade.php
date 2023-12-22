@@ -18,28 +18,11 @@
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="detail-gallery">
                                         <span class="zoom-icon"><i class="fi-rs-search"></i></span>
-                                        <!-- MAIN SLIDES -->
                                         <div class="product-image-slider">
                                             <figure class="border-radius-10">
                                                 <img src="{{ asset('assets/imgs/products') }}/{{$product->image}}" alt="product image">
                                             </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-') }}{{$product->id}}-1.jpg" alt="product image">
-                                            </figure>
                                         </div>
-                                        <!-- THUMBNAILS -->
-                                        <div class="slider-nav-thumbnails pl-15 pr-15">
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-3.jpg') }}" alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-4.jpg') }}" alt="product image"></div>                                            
-                                        </div>
-                                    </div>
-                                    <!-- End Gallery -->
-                                    <div class="social-icons single-share">
-                                        <ul class="text-grey-5 d-inline-block">
-                                            <li><strong class="mr-10">Share this:</strong></li>
-                                            <li class="social-instagram"><a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a></li>
-                                            <li class="social-linkedin"><a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a></li>
-                                        </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -52,7 +35,7 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand">${{$product->regular_price}}</span></ins>                                                
+                                                <ins><span class="text-brand">Rp {{$product->regular_price}}</span></ins>                                                
                                             </div>
                                         </div>
                                         <div class="bt-1 border-color-1 mt-15 mb-15"></div>
@@ -234,11 +217,11 @@
                             @foreach ($rproducts as $rproduct)
                                 <div class="single-post clearfix">
                                     <div class="image">
-                                        <img src="{{ asset('assets/imgs/shop/product-') }}{{$rproduct->id}}-1.jpg" alt="{{$rproduct->name}}">
+                                        <img src="{{ asset('assets/imgs/products') }}/{{$rproduct->image}}" alt="{{$rproduct->name}}">
                                     </div>
                                     <div class="content pt-10">
                                         <h5><a href="{{ route('product.details',['slug'=>$rproduct->slug]) }}">{{$rproduct->name}}</a></h5>
-                                        <p class="price mb-0 mt-5">${{$rproduct->regular_price}}</p>
+                                        <p class="price mb-0 mt-5">Rp {{$rproduct->regular_price}}</p>
                                     </div>
                                 </div>
                             @endforeach                            

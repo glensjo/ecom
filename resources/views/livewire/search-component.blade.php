@@ -81,7 +81,7 @@
                                             </div>
                                             <h2><a href="{{ route('product.details',['slug'=>$product->slug]) }}">{{$product->name}}</a></h2>
                                             <div class="product-price">
-                                                <span>${{$product->regular_price}} </span>
+                                                <span>Rp {{$product->regular_price}} </span>
                                             </div>
                                             @auth                                        
                                                 <div class="product-action-1 show">
@@ -126,7 +126,7 @@
                                     <div id="slider-range" wire:ignore></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Range:</span> <span class="text-info">${{$min_value}}</span> - <span class="text-info">${{$max_value}}</span>
+                                            <span>Range:</span> <span class="text-info">Rp {{$min_value}}</span> - <span class="text-info">Rp {{$max_value}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -147,8 +147,8 @@
             sliderrange.slider({
                 range: true,
                 min: 0,
-                max: 1000,
-                values: [0, 1000],
+                max: 250000,
+                values: [0, 250000],
                 slide: function(event, ui) {
                     // amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
                     @this.set('min_value',ui.values[0]);

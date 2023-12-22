@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('regular_price',8,2);
+            $table->decimal('regular_price',8,3);
             $table->string('image');
             $table->text('images')->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();

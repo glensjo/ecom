@@ -134,7 +134,7 @@
                                     <div id="slider-range" wire:ignore></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Range:</span> <span class="text-info">${{$min_value}}</span> - <span class="text-info">${{$max_value}}</span>
+                                            <span>Range:</span> <span class="text-info">Rp {{$min_value}}</span> - <span class="text-info">Rp {{$max_value}}</span>
                                         </div>
                                     </div>
                                 </div>
