@@ -44,12 +44,11 @@
                                         </div>
                                         <div class="product_sort_info font-xs mb-30">
                                             <ul>
-                                                <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>
-                                                <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 30 Day Return Policy</li>
-                                                <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
+                                                <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 7 Day Return Policy</li>
+                                                <li><i class="fi-rs-credit-card mr-5"></i> Cash Before Delivery</li>
                                             </ul>
                                         </div>
-                                        <div class="attr-detail attr-color mb-15">
+                                        {{-- <div class="attr-detail attr-color mb-15">
                                             <strong class="mr-10">Color</strong>
                                             <ul class="list-filter color-filter">
                                                 <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
@@ -60,32 +59,28 @@
                                                 <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
                                                 <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
                                             </ul>
-                                        </div>
-                                        <div class="attr-detail attr-size">
-                                            <strong class="mr-10">Size</strong>
-                                            <ul class="list-filter size-filter font-small">
-                                                <li><a href="#">S</a></li>
-                                                <li class="active"><a href="#">M</a></li>
-                                                <li><a href="#">L</a></li>
-                                                <li><a href="#">XL</a></li>
-                                                <li><a href="#">XXL</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                        <div class="detail-extralink">
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                            <div class="product-extra-link2">
-                                                @auth                                        
-                                                    <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add to cart</button>                                                    
-                                                @else
-                                                    <button type="button" class="button button-add-to-cart" onclick="location.href='/login'">Add to cart</button>
-                                                @endauth                                                
-                                            </div>
-                                        </div>
+                                        </div> --}}
+                                        {{-- <form wire:submit.prevent="storeCart({{$product->id}})"> --}}
+                                        
+
+                                        <form wire:submit.prevent="addToCart">
+                                            <input wire:model="product.id" type="hidden" id="id" name="id" value="{{$product->id}}">
+                                            <label for="size">Size:</label>
+                                            <input wire:model="product.size" type="text" id="size" name="size">
+                                    
+                                            <label for="qty">Quantity:</label>
+                                            <input wire:model="product.quantity" type="number" id="qty" name="qty">
+                                    
+                                            <label for="custom_description">Seller Notes:</label>
+                                            <textarea wire:model="product.custom_description" id="custom_description" name="custom_description"></textarea>
+                                    
+                                            {{-- <input type="file" wire:model="design_image" id="design_image" name="design_image"> --}}
+                                    
+                                            <button type="submit">Add to Cart</button>
+                                        </form>
+                                        
+                                        
+                                        
                                     </div>
                                     <!-- Detail Info -->
                                 </div>
@@ -217,7 +212,9 @@
                             @foreach ($rproducts as $rproduct)
                                 <div class="single-post clearfix">
                                     <div class="image">
-                                        <img src="{{ asset('assets/imgs/products') }}/{{$rproduct->image}}" alt="{{$rproduct->name}}">
+                                        <a href="{{ route('product.details',['slug'=>$rproduct->slug]) }}">
+                                            <img src="{{ asset('assets/imgs/products') }}/{{$rproduct->image}}" alt="{{$rproduct->name}}">
+                                        </a>
                                     </div>
                                     <div class="content pt-10">
                                         <h5><a href="{{ route('product.details',['slug'=>$rproduct->slug]) }}">{{$rproduct->name}}</a></h5>
@@ -232,3 +229,50 @@
         </section>
     </main>
 </div>
+
+@push('scripts')
+<script>
+    function setSize(size) {
+        Livewire.emit('setSize', size);
+    }
+</script>
+<!-- Add this at the end of your HTML or layout file -->
+<script>
+    Livewire.on('setSize', size => {
+        Livewire.component('product-details').setSize(size);
+    });
+</script>
+
+<!-- Add this script after your existing script -->
+<script>
+    let selectedSize = null;
+
+    function selectSize(button) {
+        // If the button is already selected, deselect it
+        if (button.classList.contains('selected')) {
+            button.classList.remove('selected');
+            selectedSize = null;
+        } else {
+            // Deselect all size buttons
+            const sizeButtons = document.querySelectorAll('.size-button');
+            sizeButtons.forEach(btn => btn.classList.remove('selected'));
+
+            // Select the clicked button
+            button.classList.add('selected');
+            selectedSize = button.innerText;
+        }
+
+        // Disable all size buttons except the selected one
+        const sizeButtons = document.querySelectorAll('.size-button');
+        sizeButtons.forEach(btn => {
+            if (btn.innerText !== selectedSize) {
+                btn.disabled = false; // Enable all size buttons
+            }
+        });
+    }
+</script>
+
+
+
+@endpush
+

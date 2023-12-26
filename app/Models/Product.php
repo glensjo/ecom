@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    protected $fillable = [
+        // your existing fields
+        'size', 'qty', 'custom_description', 'design_image',
+    ];
 
     public function category()
     {

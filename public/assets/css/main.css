@@ -783,6 +783,21 @@ h5.widget-title {
   padding: 13px 28px;
 }
 
+.size-button {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  background-color: white;
+  color: black;
+  border: 2px solid #04AA6D;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.size-button.selected {
+  background-color: #04AA6D;
+  color: white;
+}
+
 .btn-default i {
   font-weight: 400;
   font-size: 12px;
