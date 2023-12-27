@@ -61,14 +61,4 @@ class ShopComponent extends Component
         $categories = Category::orderBy('name','ASC')->get(); 
         return view('livewire.shop-component',['products'=>$products, 'categories'=>$categories]);
     }
-
-    public function addToCart($id)
-    {
-        if(auth()->user()){
-            // $product = Product::findOrFail($id);
-        }
-        else{
-            return redirect(route('login'));
-        }
-    }
 }

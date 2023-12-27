@@ -47,7 +47,6 @@ class DetailsComponent extends Component
         $cart->product_id=$prod->id;
         $cart->user_id=auth()->user()->id;
         $cart->save();
-        
         session()->flash('success_message','Item added in Cart');
         return redirect()->route('shop.cart');
     }

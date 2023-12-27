@@ -35,31 +35,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Cart::content() as $item)
+                                    @foreach ($carts as $item)
                                         <tr>
-                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/products') }}/{{$item->model->image}}" alt="{{$item->model->name}}"></td>
+                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/products') }}/{{$item->product->image}}" alt="{{$item->product->name}}"></td>
                                             <td class="product-des product-name">
-                                                <h5 class="product-name"><a href="{{ route('product.details',['slug'=>$item->model->slug]) }}">{{$item->model->name}}</a></h5>
+                                                <h5 class="product-name"><a href="{{ route('product.details',['slug'=>$item->product->slug]) }}">{{$item->product->name}}</a></h5>
                                                 </td>
-                                            <td class="price" data-title="Price"><span>${{$item->model->regular_price}} </span></td>
-                                            <td class="price" data-title="Price"><span>${{$item->model->size}} </span></td>
-                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/designs') }}/{{$item->model->image}}" alt="{{$item->model->name}}"></td>
+                                            <td class="price" data-title="Price"><span>Rp {{$item->product->regular_price}} </span></td>
+                                            <td class="price" data-title="Price"><span>{{$item->size}} </span></td>
+                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/designs') }}/{{$item->design_image}}" alt="{{$item->product->name}}"></td>
                                             <td class="text-center" data-title="Stock">
                                                 <div class="detail-qty border radius  m-auto">
-                                                    <a href="#" class="qty-down" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"><i class="fi-rs-angle-small-down"></i></a>
+                                                    <a href="#" class="qty-down" wire:click.prevent="decreaseQuantity('{{$item->id}}')"><i class="fi-rs-angle-small-down"></i></a>
                                                     <span class="qty-val">{{$item->qty}}</span>
-                                                    <a href="#" class="qty-up" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"><i class="fi-rs-angle-small-up"></i></a>
+                                                    <a href="#" class="qty-up" wire:click.prevent="increaseQuantity('{{$item->id}}')"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
                                             </td>
                                             <td class="text-right" data-title="Cart">
-                                                <span>${{$item->subtotal}} </span>
+                                                <span>Rp {{$item->product->regular_price * $item->qty}}.000 </span>
                                             </td>
-                                            <td class="action" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="fi-rs-trash"></i></a></td>
+                                            <td class="action" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="destroy('{{$item->id}}')"><i class="fi-rs-trash"></i></a></td>
                                         </tr>
                                     @endforeach
                                     
                                     <tr>
-                                        <td colspan="6" class="text-end">
+                                        <td colspan="8" class="text-end">
                                             <a href="#" class="text-muted" wire:click.prevent="clearAll()"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
                                         </td>
                                     </tr>
@@ -359,15 +359,15 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="cart_total_label">Cart Subtotal</td>
-                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">${{Cart::subtotal()}}</span></td>
+                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">Rp {{ $sub_total }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="cart_total_label">Tax</td>
-                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">${{Cart::tax()}}</span></td>
+                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">Rp {{ $tax }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="cart_total_label">Total</td>
-                                                    <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{Cart::total()}}</span></strong></td>
+                                                    <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">Rp {{ $total }}</span></strong></td>
                                                 </tr>
                                             </tbody>
                                         </table>
