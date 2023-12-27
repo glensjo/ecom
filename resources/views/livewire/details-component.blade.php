@@ -60,25 +60,41 @@
                                                 <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
                                             </ul>
                                         </div> --}}
-                                        {{-- <form wire:submit.prevent="storeCart({{$product->id}})"> --}}
-                                        
-
-                                        <form wire:submit.prevent="addToCart">
-                                            <input wire:model="product.id" type="hidden" id="id" name="id" value="{{$product->id}}">
-                                            <label for="size">Size:</label>
-                                            <input wire:model="product.size" type="text" id="size" name="size">
-                                    
-                                            <label for="qty">Quantity:</label>
-                                            <input wire:model="product.quantity" type="number" id="qty" name="qty">
-                                    
-                                            <label for="custom_description">Seller Notes:</label>
-                                            <textarea wire:model="product.custom_description" id="custom_description" name="custom_description"></textarea>
-                                    
-                                            {{-- <input type="file" wire:model="design_image" id="design_image" name="design_image"> --}}
-                                    
-                                            <button type="submit">Add to Cart</button>
+                                        <form wire:submit.prevent="addCart">
+                                            <div class="mb-3 mt-3">
+                                                <label for="size" class="form-label">Size</label>
+                                                <input type="text" name="size" class="form-control" placeholder="Enter Your Custom Size" wire:model="size">
+                                                @error('size')
+                                                    <p class="text-danger">{{$message}} </p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3 mt-3">
+                                                <label for="qty" class="form-label">Quantity</label>
+                                                <input type="number" name="qty" class="form-control" placeholder="Enter Your Custom Quantity" wire:model="qty">
+                                                @error('qty')
+                                                    <p class="text-danger">{{$message}} </p>
+                                                @enderror
+                                            </div>                          
+                                            <div class="mb-3 mt-3">
+                                                <label for="custom_description" class="form-label">Custom Description</label>
+                                                <textarea name="custom_description" class="form-control" placeholder="Enter Your Custom Description" wire:model="custom_description"></textarea>
+                                                @error('custom_description')
+                                                    <p class="text-danger">{{$message}} </p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3 mt-3">
+                                                <label for="design_image" class="form-label">Design Image</label>
+                                                <input type="file" name="design_image" class="form-control" wire:model="design_image">
+                                                @if ($design_image)
+                                                    <img src="{{$design_image->temporaryUrl()}}" width="120">
+                                                @endif
+                                                @error('design_image')
+                                                    <p class="text-danger">{{$message}} </p>
+                                                @enderror
+                                            </div>
+                                            <button type="submit" class="btn btn-primary float-end">Add to Cart</button>
                                         </form>
-                                        
+
                                         
                                         
                                     </div>

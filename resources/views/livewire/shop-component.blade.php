@@ -91,15 +91,9 @@
                                             <div class="product-price">
                                                 <span>Rp {{$product->regular_price}} </span>
                                             </div>
-                                            @auth                                        
-                                                <div class="product-action-1 show">
-                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
-                                                </div>
-                                            @else
-                                                <div class="product-action-1 show">
-                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="{{ route('login') }}"><i class="fi-rs-shopping-bag-add"></i></a>
-                                                </div>      
-                                            @endauth                                            
+                                            <div class="product-action-1 show">
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="{{ route('product.details',['slug'=>$product->slug]) }}"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

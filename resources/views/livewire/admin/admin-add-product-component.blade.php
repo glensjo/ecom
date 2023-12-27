@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="regular_price" class="form-label">Regular Price</label>
-                                    <input type="text" name="regular_price" class="form-control" placeholder="Enter Product Regular Price" wire:model="regular_price">
+                                    <input type="number" name="regular_price" class="form-control" placeholder="Enter Product Regular Price" wire:model="regular_price">
                                     @error('regular_price')
                                         <p class="text-danger">{{$message}} </p>
                                     @enderror

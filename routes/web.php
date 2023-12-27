@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminAddCategoryComponent;
 use App\Livewire\Admin\AdminAddProductComponent;
