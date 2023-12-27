@@ -16,13 +16,6 @@ class ShopComponent extends Component
     public $min_value = 0;
     public $max_value = 250000;
 
-    public function store($product_id,$product_name,$product_price)
-    {
-        Cart::add($product_id, $product_name,1, $product_price)->associate('\App\Models\Product');
-        session()->flash('success_message','Item added in Cart');
-        return redirect()->route('shop.cart');
-    }
-
     public function changePageSize($size)
     {
         $this->pageSize = $size;

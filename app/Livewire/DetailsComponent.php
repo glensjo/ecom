@@ -32,7 +32,7 @@ class DetailsComponent extends Component
     {
         $prod = Product::where("slug", $this->slug)->first();
         $this->validate([
-            'size' => 'required',
+            'size' => '',
             'qty'=> 'required',
             'custom_description' => 'required',
             'design_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048' // Adjust the max size as neede
@@ -41,7 +41,8 @@ class DetailsComponent extends Component
         $cart->size=$this->size;
         $cart->qty=$this->qty;
         $cart->custom_description=$this->custom_description;
-        $imageName = Carbon::now()->timestamp.'.'.$this->design_image->getClientOriginalName();
+        // $imageName = Carbon::now()->timestamp.'.'.$this->design_image->getClientOriginalName();
+        $imageName = auth()->user()->id.'.'.$this->design_image->getClientOriginalName();
         $this->design_image->storeAs('designs', $imageName);
         $cart->design_image = $imageName;
         $cart->product_id=$prod->id;

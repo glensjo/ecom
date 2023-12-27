@@ -9,17 +9,21 @@ class CartIconComponent extends Component
 {
     // protected $listeners = ['updateCartItemCount' => 'cartItemCount'];
     public $total = 0;
+    public $carts;
 
     public function cartItemCount()
     {
-        if(auth()->user()){
         $this->total = Cart::whereUserId(auth()->user()->id)->count();
-        }
     }
 
     public function render()
     {
-        $this->cartItemCount();
+        if(auth()->user()){
+            $this->carts = Cart::with('product')
+                    ->where(['user_id'=>auth()->user()->id])
+                    ->get();
+            $this->cartItemCount();
+        }
         return view('livewire.cart-icon-component');
     }
 }

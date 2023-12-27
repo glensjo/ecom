@@ -61,13 +61,25 @@
                                             </ul>
                                         </div> --}}
                                         <form wire:submit.prevent="addCart">
-                                            <div class="mb-3 mt-3">
-                                                <label for="size" class="form-label">Size</label>
-                                                <input type="text" name="size" class="form-control" placeholder="Enter Your Custom Size" wire:model="size">
-                                                @error('size')
-                                                    <p class="text-danger">{{$message}} </p>
-                                                @enderror
-                                            </div>
+                                            
+                                            @if ($product->category->name == "Convection")
+                                                {{-- <div class="attr-detail attr-size">
+                                                    <strong class="mr-10">Size</strong>
+                                                    <div class="size-buttons">
+                                                        <button class="size-button" onclick="selectSize(this)">S</button>
+                                                        <button class="size-button" onclick="selectSize(this)">M</button>
+                                                        <button class="size-button" onclick="selectSize(this)">L</button>
+                                                        <button class="size-button" onclick="selectSize(this)">XL</button>
+                                                    </div>                                                
+                                                </div> --}}
+                                                <div class="mb-3 mt-3">
+                                                    <label for="size" class="form-label">Size</label>
+                                                    <input type="text" name="size" class="form-control" placeholder="Enter Your Custom Size" wire:model="size">
+                                                    @error('size')
+                                                        <p class="text-danger">{{$message}} </p>
+                                                    @enderror
+                                                </div>
+                                            @endif
                                             <div class="mb-3 mt-3">
                                                 <label for="qty" class="form-label">Quantity</label>
                                                 <input type="number" name="qty" class="form-control" placeholder="Enter Your Custom Quantity" wire:model="qty">
@@ -92,11 +104,12 @@
                                                     <p class="text-danger">{{$message}} </p>
                                                 @enderror
                                             </div>
-                                            <button type="submit" class="btn btn-primary float-end">Add to Cart</button>
+                                            @auth                                        
+                                                <button type="submit" class="button button-add-to-cart float-end">Add to cart</button>                                                    
+                                            @else
+                                                <button type="button" class="button button-add-to-cart float-end" onclick="location.href='/login'">Add to cart</button>
+                                            @endauth
                                         </form>
-
-                                        
-                                        
                                     </div>
                                     <!-- Detail Info -->
                                 </div>

@@ -10,13 +10,14 @@ use Livewire\Component;
 class CartComponent extends Component
 {
     public $carts, $sub_total = 0, $total = 0, $tax = 0;
+    protected $debug = true;
     public function increaseQuantity($id)
     {
         $cart = Cart::whereId($id)->first();
         $cart->qty += 1;
         $cart->save();
         session()->flash("success_message","Item quantity has been updated!!");
-        // return redirect('/cart');
+        return redirect('/cart');
     }
 
     public function decreaseQuantity($id)
@@ -29,7 +30,7 @@ class CartComponent extends Component
         } else {
             session()->flash("info","You cannot have less than 1!!");
         }
-        // return redirect('/cart');
+        return redirect('/cart');
     }
 
     public function destroy($id)
@@ -44,12 +45,12 @@ class CartComponent extends Component
 
     public function clearAll()
     {
-        // $cart = Cart::all();
-        // if ($cart) {
-        //     $cart->delete();            
-        // }
-        // session()->flash("success_message","All item removed!!");
-        // return redirect('/cart');   
+        $cart = Cart::all();
+        foreach ($cart as $item) {
+            $item->delete();            
+        }
+        session()->flash("success_message","All item removed!!");
+        return redirect('/cart');   
     }
 
     public function render()
@@ -66,7 +67,6 @@ class CartComponent extends Component
             $this->sub_total += $item->product->regular_price * $item->qty;
         }
         $this->total = $this->sub_total + $this->tax;
-
         return view('livewire.cart-component');
     }
 }
