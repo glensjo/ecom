@@ -39,13 +39,16 @@ class CartComponent extends Component
         if ($cart) {
             $cart->delete();            
         }
+        
         session()->flash("success_message","Item has been removed!!");
         return redirect('/cart');
     }
 
     public function clearAll()
     {
-        $cart = Cart::all();
+        $cart = Cart::with('product')
+                ->where(['user_id'=>auth()->user()->id])
+                ->get();
         foreach ($cart as $item) {
             $item->delete();            
         }

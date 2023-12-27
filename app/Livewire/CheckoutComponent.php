@@ -2,12 +2,28 @@
 
 namespace App\Livewire;
 
+use App\Models\Cart;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
 {
+    public $carts, $sub_total = 0, $total = 0, $tax = 0;
     public function render()
     {
+        $this->carts = Cart::with('product')
+                ->where(['user_id'=>auth()->user()->id])
+                ->get();
+                $this->total = 0;
+        $this->tax = 0;
+        $this->sub_total = 0;
+
+        foreach($this->carts as $item) 
+        {
+            $this->sub_total += $item->product->regular_price * $item->qty;
+        }
+        $this->total = $this->sub_total + $this->tax;
         return view('livewire.checkout-component');
     }
+
+    
 }

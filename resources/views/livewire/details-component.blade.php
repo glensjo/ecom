@@ -82,14 +82,14 @@
                                             @endif
                                             <div class="mb-3 mt-3">
                                                 <label for="qty" class="form-label">Quantity</label>
-                                                <input type="number" name="qty" class="form-control" placeholder="Enter Your Custom Quantity" wire:model="qty">
+                                                <input type="number" name="qty" class="form-control" placeholder="Minimum Quantity 1" wire:model="qty">
                                                 @error('qty')
                                                     <p class="text-danger">{{$message}} </p>
                                                 @enderror
                                             </div>                          
                                             <div class="mb-3 mt-3">
                                                 <label for="custom_description" class="form-label">Custom Description</label>
-                                                <textarea name="custom_description" class="form-control" placeholder="Enter Your Custom Description" wire:model="custom_description"></textarea>
+                                                <textarea name="custom_description" class="form-control" placeholder="Custom Color, Material, Accessories, etc" wire:model="custom_description"></textarea>
                                                 @error('custom_description')
                                                     <p class="text-danger">{{$message}} </p>
                                                 @enderror
@@ -105,7 +105,7 @@
                                                 @enderror
                                             </div>
                                             @auth                                        
-                                                <button type="submit" class="button button-add-to-cart float-end">Add to cart</button>                                                    
+                                                <button type="submit" class="button button-add-to-cart float-end">Add to cart</button>
                                             @else
                                                 <button type="button" class="button button-add-to-cart float-end" onclick="location.href='/login'">Add to cart</button>
                                             @endauth
