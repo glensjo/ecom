@@ -61,10 +61,67 @@
                                             <td>{{$order->size}} </td>
                                             <td>{{$order->qty}} </td>
                                             <td><img src="{{ asset('assets/imgs/paymentValidations') }}/{{$order->payment_image}}" alt="{{$order->user->name}}" width="60"></td>
-                                            <td>Payment validation </td>
                                             <td>
-                                                {{-- <a href="{{ route('admin.product.edit', ['product_id'=>$order->id]) }}" class="text-info">Edit</a> --}}
-                                                {{-- <a href="{{ route('admin.product.edit',['product_id'=>$product->id]) }}" class="text-info">Edit</a> --}}
+                                                Current status : {{$order->status}}
+                                                {{-- <form wire:submit.prevent="updateStatus">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="mb-3 mt-3">
+                                                            <select name="status">
+                                                                <option value="">Select Status</option>
+                                                                @foreach($options as $option)
+                                                                    <option value="{{ $option }}">{{ $option }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('status')
+                                                                <p class="text-danger">{{$message}} </p>
+                                                            @enderror
+                                                        </div>
+                                                        <input type="hidden" value="{{ $order->id }}">
+                                                        <button type="submit" class="btn float-end">Update</button>
+                                                    </div>
+                                                </form> --}}
+
+                                                {{-- <form wire:submit.prevent="updateStatus">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="mb-3 mt-3">
+                                                            <p>Select Status:</p>
+                                                            @foreach($options as $option)
+                                                                    <input type="radio" id="{{$option}}" name="status" value="{{$option}}" wire:model="status">
+                                                                    <label for="{{$option}}">{{$option}}</label><br>
+                                                             @endforeach
+                                                            @error('status')
+                                                                <p class="text-danger">{{$message}} </p>
+                                                            @enderror
+                                                        </div>
+                                                        <input type="hidden" value="{{ $order->id }}">
+                                                        <button type="submit" class="btn float-end">Update</button>
+                                                    </div>
+                                                </form> --}}
+                                                
+                                                <form wire:submit.prevent="updateStatus">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="mb-3 mt-3">
+                                                            <p>Select Status:</p>
+                                                            {{-- @foreach($options as $option)
+                                                                <input type="radio" id="{{$option}}" name="status" value="{{$option}}" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
+                                                                <label for="{{$option}}">{{$option}}</label><br>
+                                                            @endforeach --}}
+                                                            @foreach($options as $option)
+                                                                <input type="radio" id="{{$option . '_' . $order->id}}" name="status" value="{{$option}}" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
+                                                                <label for="{{$option . '_' . $order->id}}">{{$option}}</label><br>
+                                                            @endforeach
+                                                            @error('status')
+                                                                <p class="text-danger">{{$message}} </p>
+                                                            @enderror
+                                                        </div>
+                                                        <!-- Use wire:model for the $order_id property -->
+                                                        <input type="hidden" wire:model="order_id">
+                                                        <button type="submit" class="btn float-end">Update</button>
+                                                    </div>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

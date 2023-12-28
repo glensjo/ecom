@@ -29,17 +29,11 @@
                                         <td class="price" data-title="Price"><span>Rp {{$item->product->regular_price}} </span></td>
                                         <td class="price" data-title="Price"><span>{{$item->size}} </span></td>
                                         <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/designs') }}/{{$item->design_image}}" alt="{{$item->product->name}}"></td>
-                                        <td class="text-center" data-title="Stock">
-                                            <div class="detail-qty border radius  m-auto">
-                                                <a href="#" class="qty-down" wire:click.prevent="decreaseQuantity('{{$item->id}}')"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">{{$item->qty}}</span>
-                                                <a href="#" class="qty-up" wire:click.prevent="increaseQuantity('{{$item->id}}')"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                        </td>
+                                        <td class="text-center" data-title="Stock"><span class="qty-val">{{$item->qty}}</span></td>
                                         <td class="text-right" data-title="Cart">
-                                            <span>Rp {{$item->product->regular_price * $item->qty}}.000 </span>
+                                            <span>Rp {{ number_format($item->product->regular_price * $item->qty, 3, '.', '.') }} </span>
                                         </td>
-                                        <td>...</td>
+                                        <td><span>{{$item->status}} </span></td>
                                     </tr>
                                 @endforeach
                             </tbody>

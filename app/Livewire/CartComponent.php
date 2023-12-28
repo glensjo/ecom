@@ -69,6 +69,7 @@ class CartComponent extends Component
         {
             $this->sub_total += $item->product->regular_price * $item->qty;
         }
+        $this->tax = $this->sub_total * 0.1;
         $this->total = $this->sub_total + $this->tax;
         return view('livewire.cart-component');
     }

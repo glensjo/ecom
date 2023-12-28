@@ -19,7 +19,12 @@
                                 @if (Session::has('success_message'))
                                     <div class="alert alert-success">
                                         <strong>Success | {{Session::get('success_message')}} </strong>
-                                    </div>                                        
+                                    </div>                                      
+                                @endif
+                                @if (Session::has('info'))
+                                    <div class="alert alert-info">
+                                        <strong>Info | {{Session::get('info')}} </strong>
+                                    </div>                                      
                                 @endif
                                 @if ($carts!==0)
                                 <thead>
@@ -52,7 +57,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-right" data-title="Cart">
-                                                <span>Rp {{$item->product->regular_price * $item->qty}}.000 </span>
+                                                <span>Rp {{ number_format($item->product->regular_price * $item->qty, 3, '.', '.') }}</span>
                                             </td>
                                             <td class="action" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="destroy('{{$item->id}}')"><i class="fi-rs-trash"></i></a></td>
                                         </tr>
@@ -86,15 +91,15 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="cart_total_label">Cart Subtotal</td>
-                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">Rp {{ $sub_total }}</span></td>
+                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">Rp {{ number_format($sub_total, 3, '.', '.') }}</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="cart_total_label">Tax</td>
-                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">Rp {{ $tax }}</span></td>
+                                                    <td class="cart_total_label">Tax (10%)</td>
+                                                    <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">Rp {{ number_format($tax, 3, '.', '.') }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="cart_total_label">Total</td>
-                                                    <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">Rp {{ $total }}</span></strong></td>
+                                                    <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">Rp {{ number_format($total, 3, '.', '.') }}</span></strong></td>
                                                 </tr>
                                             </tbody>
                                         </table>

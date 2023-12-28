@@ -92,13 +92,11 @@
                             <nav>
                                 <ul>
                                     <li><a href="/">Home </a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="{{ route('shop') }}">Shop</a></li>
-                                    <li><a href="blog.html">Blog </a></li>                                    
+                                    <li><a href="{{ route('shop') }}">Shop</a></li>                       
                                     <li><a href="contact.html">Contact</a></li>
                                     @auth                                        
                                         @if (Auth::user()->utype == 'ADM')
-                                                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                                {{-- <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
                                                 <li><a href="{{ route('admin.products') }}">Products</a></li>
                                                 <li><a href="{{ route('admin.categories') }}">Categories</a></li>
                                                 <li><a href="{{ route('admin.orders') }}">Orders</a></li>

@@ -11,7 +11,7 @@ class CheckoutComponent extends Component
 {
     use WithFileUploads;
     public $carts, $sub_total = 0, $total = 0, $tax = 0;
-    public $payment_image;
+    public $payment_image, $status;
 
     public function placeOrder()
     {
@@ -27,11 +27,12 @@ class CheckoutComponent extends Component
             $order->size=$item->size;
             $order->qty=$item->qty;
             $order->custom_description=$item->custom_description;
-            // $order->payment_image = $item->design_image;
-            // $imageName = Carbon::now()->timestamp.'.'.$this->design_image->getClientOriginalName();
+            $order->design_image = $item->design_image;
+            // $imageName = Carbon::now()->timestamp.'.'.$this->payment_image->getClientOriginalName();
             $imageName = auth()->user()->id.'.'.$this->payment_image->getClientOriginalName();
             $this->payment_image->storeAs('paymentValidations', $imageName);
             $order->payment_image = $imageName;
+            $order->status = "Waiting";
             $order->product_id=$item->product->id;
             $order->user_id=auth()->user()->id;
             $order->save();
@@ -61,6 +62,7 @@ class CheckoutComponent extends Component
         {
             $this->sub_total += $item->product->regular_price * $item->qty;
         }
+        $this->tax = $this->sub_total * 0.1;
         $this->total = $this->sub_total + $this->tax;
         return view('livewire.checkout-component');
     }

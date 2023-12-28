@@ -48,33 +48,21 @@
                                                 <li><i class="fi-rs-credit-card mr-5"></i> Cash Before Delivery</li>
                                             </ul>
                                         </div>
-                                        {{-- <div class="attr-detail attr-color mb-15">
-                                            <strong class="mr-10">Color</strong>
-                                            <ul class="list-filter color-filter">
-                                                <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
-                                                <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                                <li class="active"><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
-                                                <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
-                                                <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
-                                                <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                                <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
-                                            </ul>
-                                        </div> --}}
                                         <form wire:submit.prevent="addCart">
                                             
                                             @if ($product->category->name == "Convection")
-                                                {{-- <div class="attr-detail attr-size">
-                                                    <strong class="mr-10">Size</strong>
-                                                    <div class="size-buttons">
-                                                        <button class="size-button" onclick="selectSize(this)">S</button>
-                                                        <button class="size-button" onclick="selectSize(this)">M</button>
-                                                        <button class="size-button" onclick="selectSize(this)">L</button>
-                                                        <button class="size-button" onclick="selectSize(this)">XL</button>
-                                                    </div>                                                
-                                                </div> --}}
                                                 <div class="mb-3 mt-3">
                                                     <label for="size" class="form-label">Size</label>
-                                                    <input type="text" name="size" class="form-control" placeholder="Enter Your Custom Size" wire:model="size">
+                                                    {{-- <input type="text" name="size" class="form-control" placeholder="Enter Your Custom Size" wire:model="size"> --}}
+                                                    <select name="status" wire:model="size">
+                                                        <option value="">Select Size</option>
+                                                        <option value="S">S</option>
+                                                        <option value="M">M</option>
+                                                        <option value="L">L</option>
+                                                        <option value="XL">XL</option>
+                                                        <option value="XXL">XXL</option>
+                                                        <option value="XXXL">XXXL</option>
+                                                    </select>
                                                     @error('size')
                                                         <p class="text-danger">{{$message}} </p>
                                                     @enderror
@@ -258,50 +246,4 @@
         </section>
     </main>
 </div>
-
-@push('scripts')
-<script>
-    function setSize(size) {
-        Livewire.emit('setSize', size);
-    }
-</script>
-<!-- Add this at the end of your HTML or layout file -->
-<script>
-    Livewire.on('setSize', size => {
-        Livewire.component('product-details').setSize(size);
-    });
-</script>
-
-<!-- Add this script after your existing script -->
-<script>
-    let selectedSize = null;
-
-    function selectSize(button) {
-        // If the button is already selected, deselect it
-        if (button.classList.contains('selected')) {
-            button.classList.remove('selected');
-            selectedSize = null;
-        } else {
-            // Deselect all size buttons
-            const sizeButtons = document.querySelectorAll('.size-button');
-            sizeButtons.forEach(btn => btn.classList.remove('selected'));
-
-            // Select the clicked button
-            button.classList.add('selected');
-            selectedSize = button.innerText;
-        }
-
-        // Disable all size buttons except the selected one
-        const sizeButtons = document.querySelectorAll('.size-button');
-        sizeButtons.forEach(btn => {
-            if (btn.innerText !== selectedSize) {
-                btn.disabled = false; // Enable all size buttons
-            }
-        });
-    }
-</script>
-
-
-
-@endpush
 

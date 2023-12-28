@@ -77,21 +77,21 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-right" data-title="Cart">
-                                                    <span>Rp {{$item->product->regular_price * $item->qty}}.000 </span>
+                                                    <span>Rp {{ number_format($item->product->regular_price * $item->qty, 3, '.', '.') }} </span>
                                                 </td>
                                             </tr>
                                         @endforeach
                                         <tr>
                                             <th>SubTotal</th>
-                                            <td class="product-subtotal" colspan="2">Rp {{ $sub_total }} </td>
+                                            <td class="product-subtotal" colspan="2">Rp {{ number_format($sub_total, 3, '.', '.') }} </td>
                                         </tr>
                                         <tr>
-                                            <th>Tax</th>
-                                            <td class="product-subtotal" colspan="2">Rp {{ $tax }} </td>
+                                            <th>Tax (10%) </th>
+                                            <td class="product-subtotal" colspan="2">Rp {{ number_format($tax, 3, '.', '.') }} </td>
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">Rp {{ $total }}</span></td>
+                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">Rp {{ number_format($total, 3, '.', '.') }}</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
