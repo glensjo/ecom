@@ -101,8 +101,8 @@
                                                 <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                                                 <li><a href="{{ route('admin.products') }}">Products</a></li>
                                                 <li><a href="{{ route('admin.categories') }}">Categories</a></li>
-                                                <li><a href="#">Orders</a></li>
-                                                <li><a href="#">Customers</a></li> 
+                                                <li><a href="{{ route('admin.orders') }}">Orders</a></li>
+                                                <li><a href="#">Reports</a></li> 
                                         @else
                                                 <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>                                                
                                         @endif 

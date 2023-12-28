@@ -50,7 +50,7 @@
                             <div class="form-group mb-30">
                                 <textarea rows="5" placeholder="Order notes"></textarea>
                             </div>
-                        {{-- </form> --}}
+                        </form>
                     </div>
                     <div class="col-md-6">
                         <div class="order_review">
@@ -101,17 +101,17 @@
                                 <div class="mb-25">
                                     <h5>Payment</h5>
                                 </div>
-                                {{-- <form > --}}
-                                    {{-- @csrf --}}
+                                <form wire:submit.prevent="placeOrder">
+                                    @csrf
                                     <div class="mb-3 mt-3">
                                         <label for="payment_image" class="form-label">Upload your payment</label>
                                         <input type="file" name="payment_image" class="form-control" wire:model="payment_image">
-                                        {{-- @if ($payment_image)
+                                        @if ($payment_image)
                                             <img src="{{$payment_image->temporaryUrl()}}" width="120">
                                         @endif
                                         @error('payment_image')
                                             <p class="text-danger">{{$message}} </p>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
                                     <button type="submit" class="button button-add-to-cart float-end">Pay and Order</button>
                                 </form>

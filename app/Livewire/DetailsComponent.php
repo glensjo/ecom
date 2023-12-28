@@ -35,7 +35,7 @@ class DetailsComponent extends Component
             'size' => '',
             'qty'=> 'required',
             'custom_description' => 'required',
-            'design_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048' // Adjust the max size as neede
+            'design_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
         ]);
         $cart= new CartModel();
         $cart->size=$this->size;
