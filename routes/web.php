@@ -10,10 +10,10 @@ use App\Livewire\Admin\AdminEditCategoryComponent;
 use App\Livewire\Admin\AdminEditProductComponent;
 use App\Livewire\Admin\AdminOrderComponent;
 use App\Livewire\Admin\AdminProductComponent;
-use App\Livewire\Admin\ManageOrders;
 use App\Livewire\CartComponent;
 use App\Livewire\CategoryComponent;
 use App\Livewire\CheckoutComponent;
+use App\Livewire\ContactComponent;
 use App\Livewire\DetailsComponent;
 use App\Livewire\HomeComponent;
 use App\Livewire\SearchComponent;
@@ -49,6 +49,8 @@ Route::get("/checkout", CheckoutComponent::class)->name("shop.checkout");
 Route::get('/product-category/{slug}', CategoryComponent::class)->name('product.category');
 
 Route::get("/search", SearchComponent::class)->name("product.search");
+
+Route::get("/contact", ContactComponent::class)->name("contact");
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

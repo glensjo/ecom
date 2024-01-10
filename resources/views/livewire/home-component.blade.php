@@ -87,7 +87,7 @@
                 </div>
             </div>
         </section>
-        <section class="product-tabs section-padding position-relative wow fadeIn animated">
+        {{-- <section class="product-tabs section-padding position-relative wow fadeIn animated">
             <div class="bg-square"></div>
             <div class="container">
                 <div class="tab-header">
@@ -102,7 +102,7 @@
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">New added</button>
                         </li>
                     </ul>
-                    <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
+                    <a href="{{ route('shop') }}" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
                 </div>
                 <!--End nav-tabs-->
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
@@ -1085,7 +1085,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
        
         <section class="section-padding">
             <div class="container">
