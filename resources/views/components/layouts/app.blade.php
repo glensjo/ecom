@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{asset ('assets/css/main.css') }}">
 <link rel="stylesheet" href="{{asset ('assets/css/custom.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css" rel="stylesheet">
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="2d928d3a-5d93-4b59-8dc3-088f6568f3c8";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 @livewireStyles
 </head>
 
