@@ -43,10 +43,6 @@ class ShopComponent extends Component
         {
             $products = Product::whereBetween('regular_price',[$this->min_value,$this->max_value])->orderBy('regular_price', 'DESC')->paginate($this->pageSize);
         }
-        else if($this->orderBy == 'Sort by Newness') 
-        {
-            $products = Product::whereBetween('regular_price',[$this->min_value,$this->max_value])->orderBy('created_at', 'ASC')->paginate($this->pageSize);
-        }
         else
         {
             $products = Product::whereBetween('regular_price',[$this->min_value,$this->max_value])->paginate($this->pageSize);

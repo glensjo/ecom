@@ -46,10 +46,6 @@ class CategoryComponent extends Component
         {
             $products = Product::where('category_id',$category_id)->whereBetween('regular_price',[$this->min_value,$this->max_value])->orderBy('regular_price', 'DESC')->paginate($this->pageSize);
         }
-        else if($this->orderBy == 'Sort by Newness') 
-        {
-            $products = Product::where('category_id',$category_id)->whereBetween('regular_price',[$this->min_value,$this->max_value])->orderBy('created_at', 'ASC')->paginate($this->pageSize);
-        }
         else
         {
             $products = Product::where('category_id',$category_id)->whereBetween('regular_price',[$this->min_value,$this->max_value])->paginate($this->pageSize);

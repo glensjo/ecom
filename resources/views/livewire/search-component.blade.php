@@ -57,7 +57,6 @@
                                             <li><a class="{{ $orderBy== 'Default Sorting' ? 'active': ''}}" href="#" wire:click.prevent="changeOrderBy('Default Sorting')">Default Sorting</a></li>
                                             <li><a class="{{ $orderBy== 'Price: Low to High' ? 'active': ''}}" href="#" wire:click.prevent="changeOrderBy('Price: Low to High')">Price: Low to High</a></li>
                                             <li><a class="{{ $orderBy== 'Price: High to Low' ? 'active': ''}}" href="#" wire:click.prevent="changeOrderBy('Price: High to Low')">Price: High to Low</a></li>
-                                            <li><a class="{{ $orderBy== 'Sort By Newness' ? 'active': ''}}" href="#" wire:click.prevent="changeOrderBy('Sort By Newness')">Sort By Newness</a></li>
                                         </ul>
                                     </div>
                                 </div>
