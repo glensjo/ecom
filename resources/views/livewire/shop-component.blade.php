@@ -127,7 +127,7 @@
                                     <div id="slider-range" wire:ignore></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Range:</span> <span class="text-info">Rp {{$min_value}}</span> - <span class="text-info">Rp {{$max_value}}</span>
+                                            <span>Range:</span> <span class="text-info">Rp {{$min_value}}</span> - <span class="text-info">Rp {{ number_format($max_value, 3, '.', '.') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -148,8 +148,8 @@
             sliderrange.slider({
                 range: true,
                 min: 0,
-                max: 250000,
-                values: [0, 250000],
+                max: 250,
+                values: [0, 250],
                 slide: function(event, ui) {
                     // amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
                     @this.set('min_value',ui.values[0]);

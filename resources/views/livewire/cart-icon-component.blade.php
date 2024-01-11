@@ -1,11 +1,11 @@
 <div class="header-action-icon-2">
-    <a class="mini-cart-icon" href="{{ route('shop.cart') }}">
-        <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
-        @if ($carts!==1)
-            <span class="pro-count blue">{{ $total }}</span>
-        @endif
-    </a>
-    @auth                                        
+    @auth  
+        <a class="mini-cart-icon" href="{{ route('shop.cart') }}">
+            <img alt="Cart" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
+            @if ($carts!==1)
+                <span class="pro-count blue">{{ $total }}</span>
+            @endif
+        </a>                                 
         <div class="cart-dropdown-wrap cart-dropdown-hm2">
             <ul>
                 @foreach ($carts as $item)
@@ -31,7 +31,12 @@
             </div>
         </div>
     @else
-             
+        <a class="mini-cart-icon" href="{{ route('login') }}">
+            <img alt="Cart" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
+            @if ($carts!==1)
+                <span class="pro-count blue">{{ $total }}</span>
+            @endif
+        </a>  
     @endauth
     
 </div>

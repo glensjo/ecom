@@ -16,7 +16,7 @@ class CategoryComponent extends Component
     public $orderBy = "Default Sorting";
     public $slug;
     public $min_value = 0;
-    public $max_value = 250000;
+    public $max_value = 250;
 
     public function changePageSize($size)
     {

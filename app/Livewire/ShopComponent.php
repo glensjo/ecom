@@ -14,7 +14,7 @@ class ShopComponent extends Component
     public $pageSize = 12;
     public $orderBy = "Default Sorting";
     public $min_value = 0;
-    public $max_value = 250000;
+    public $max_value = 250;
 
     public function changePageSize($size)
     {
