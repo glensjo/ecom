@@ -32,9 +32,8 @@ class DetailsComponent extends Component
     {
         $prod = Product::where("slug", $this->slug)->first();
         $this->validate([
-            'size' => '',
             'qty'=> 'required|numeric|min:1',
-            'custom_description' => 'required',
+            // 'custom_description' => 'required',
             'design_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
         ]);
         $cart= new CartModel();

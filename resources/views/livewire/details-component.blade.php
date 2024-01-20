@@ -54,7 +54,7 @@
                                                 <div class="mb-3 mt-3">
                                                     <label for="size" class="form-label">Size</label>
                                                     {{-- <input type="text" name="size" class="form-control" placeholder="Enter Your Custom Size" wire:model="size"> --}}
-                                                    <select name="status" wire:model="size">
+                                                    <select name="status" wire:model="size" required>
                                                         <option value="">Select Size</option>
                                                         <option value="S">S</option>
                                                         <option value="M">M</option>

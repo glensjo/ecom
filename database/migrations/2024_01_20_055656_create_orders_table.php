@@ -19,8 +19,13 @@ return new class extends Migration
             $table->text('custom_description')->nullable();
             $table->string('design_image');
             $table->integer('qty');
+            $table->string('company')->nullable();
             $table->string('payment_image');
             $table->string('status');
+            $table->string('reason')->nullable();
+            $table->decimal('subtotal',8,3);
+            $table->decimal('tax',8,3);
+            $table->decimal('total',8,3);
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

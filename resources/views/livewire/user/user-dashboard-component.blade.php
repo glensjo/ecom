@@ -1,4 +1,12 @@
 <div>
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/" rel="nofollow">Home</a>
+                <span></span> Dashboard
+            </div>
+        </div>
+    </div>
     <section class="mt-50 mb-50">
         <div class="container">
             <h2>Hi, {{ Auth::user()->name }}</h2><br>
@@ -6,7 +14,10 @@
                 <div class="col-12">
                     <div class="table-responsive">
                         <table class="table shopping-summery text-center clean">
-                            @if ($orders)
+                            @if ($orders->count() > 0)
+                            <div class="mb-20">
+                                <h4>Your Orders</h4>
+                            </div>
                             <thead>
                                 <tr class="main-heading">
                                     <th scope="col">Image</th>
@@ -38,7 +49,7 @@
                                 @endforeach
                             </tbody>
                             @else
-                                <p>Waiting for your Orders...</p>
+                                <a href="{{ route('shop') }}"><span> Waiting for your Orders... </span></a>
                             @endif
                         </table>
                     </div>

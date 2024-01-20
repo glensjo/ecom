@@ -10,8 +10,7 @@ class AdminOrderComponent extends Component
 {
     use WithPagination;
     public $orders;
-    public $order_id, $status;
-    public $options;
+    public $order_id, $status, $reason;
 
     public function updateStatus()
     {
@@ -24,10 +23,21 @@ class AdminOrderComponent extends Component
         session()->flash('message','Status has been updated successfully!');
     }
 
+    public function addReason()
+    {
+        $this->validate([
+            "reason"=> "required|string"
+        ]);
+        $orderr = Order::find($this->order_id);
+        $orderr->reason = $this->reason;
+        // dd( $order->reason);
+        $orderr->save();
+        session()->flash('message','Reason has been added!');
+    }
+
     public function render()
     {
         $this->orders = Order::get();
-        $this->options = ['Confirmed Payment', 'Rejected Order', 'In Progress', 'Ready To Pick Up','Done'];
         return view('livewire.admin.admin-order-component');
     }
 }

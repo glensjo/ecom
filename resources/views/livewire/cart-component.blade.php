@@ -26,7 +26,7 @@
                                         <strong>Info | {{Session::get('info')}} </strong>
                                     </div>                                      
                                 @endif
-                                @if ($carts!==0)
+                                @if ($carts->count() > 0)
                                 <thead>
                                     <tr class="main-heading">
                                         <th scope="col">Image</th>
@@ -62,7 +62,6 @@
                                             <td class="action" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="destroy('{{$item->id}}')"><i class="fi-rs-trash"></i></a></td>
                                         </tr>
                                     @endforeach
-                                    
                                     <tr>
                                         <td colspan="8" class="text-end">
                                             <a href="#" class="text-muted" wire:click.prevent="clearAll()"> <i class="fi-rs-cross-small"></i> Clear Cart</a>

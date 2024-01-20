@@ -11,7 +11,7 @@ class CheckoutComponent extends Component
 {
     use WithFileUploads;
     public $carts, $sub_total = 0, $total = 0, $tax = 0;
-    public $payment_image, $status;
+    public $payment_image, $status, $company;
 
     public function placeOrder()
     {
@@ -28,7 +28,11 @@ class CheckoutComponent extends Component
             $order->qty=$item->qty;
             $order->custom_description=$item->custom_description;
             $order->design_image = $item->design_image;
-            // $imageName = Carbon::now()->timestamp.'.'.$this->payment_image->getClientOriginalName();
+            $order->company = $this->company;
+            $order->subtotal = $this->sub_total;
+            // dd($order->company);
+            $order->tax = $this->tax;
+            $order->total = $this->total;
             $imageName = auth()->user()->id.'.'.$this->payment_image->getClientOriginalName();
             $this->payment_image->storeAs('paymentValidations', $imageName);
             $order->payment_image = $imageName;
@@ -46,7 +50,7 @@ class CheckoutComponent extends Component
         }
 
         session()->flash('success_message','Order Placement');
-        return $this->redirect('/');
+        return $this->redirect('/user/dashboard');
     }
 
     public function render()

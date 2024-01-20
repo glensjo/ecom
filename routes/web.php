@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminAddCategoryComponent;
 use App\Livewire\Admin\AdminAddProductComponent;
@@ -10,6 +9,7 @@ use App\Livewire\Admin\AdminEditCategoryComponent;
 use App\Livewire\Admin\AdminEditProductComponent;
 use App\Livewire\Admin\AdminOrderComponent;
 use App\Livewire\Admin\AdminProductComponent;
+use App\Livewire\Admin\AdminReportComponent;
 use App\Livewire\CartComponent;
 use App\Livewire\CategoryComponent;
 use App\Livewire\CheckoutComponent;
@@ -69,6 +69,7 @@ Route::middleware(['auth','authadmin'])->group(function () {
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.product.add');
     Route::get('/admin/product/edit/{product_id}', AdminEditProductComponent::class)->name('admin.product.edit');
     Route::get('/admin/orders', AdminOrderComponent::class)->name('admin.orders');
+    Route::get('/admin/reports', AdminReportComponent::class)->name('admin.report');
 });
 
 Route::middleware('auth')->group(function () {

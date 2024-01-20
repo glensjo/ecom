@@ -16,43 +16,8 @@
                         <div class="divider mt-50 mb-50"></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-25">
-                            <h4>Billing Details</h4>
-                        </div>
-                        <form method="post">
-                            @csrf
-                            <div class="form-group">
-                                <input type="text" required="" name="fname" placeholder="First name *">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" required="" name="lname" placeholder="Last name *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="cname" placeholder="Company Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="billing_address" required="" placeholder="Address *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="zipcode" placeholder="Postcode / ZIP *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="phone" placeholder="Phone *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="email" placeholder="Email address *">
-                            </div>
-                            <div class="mb-20">
-                                <h5>Additional information</h5>
-                            </div>
-                            <div class="form-group mb-30">
-                                <textarea rows="5" placeholder="Order notes"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
+                @if ($carts->count() > 0)
+                    <div class="row">
                         <div class="order_review">
                             <div class="mb-20">
                                 <h4>Your Orders</h4>
@@ -104,6 +69,13 @@
                                 <form wire:submit.prevent="placeOrder">
                                     @csrf
                                     <div class="mb-3 mt-3">
+                                        <label for="company" class="form-label">Company Name (optional)</label>
+                                        <input type="text" name="company" class="form-control" placeholder="Your Company Name" wire:model="company">
+                                        @error('company')
+                                            <p class="text-danger">{{$message}} </p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 mt-3">
                                         <label for="payment_image" class="form-label">Upload your payment</label>
                                         <input type="file" name="payment_image" class="form-control" wire:model="payment_image">
                                         @if ($payment_image)
@@ -119,7 +91,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    No item to checkout. <a href="{{ route('shop') }}"><span>Please add item to cart...</span></a>
+                @endif
             </div>
         </section>
     </main>
