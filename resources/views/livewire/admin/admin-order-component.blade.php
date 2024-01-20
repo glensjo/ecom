@@ -59,59 +59,6 @@
                                             <td><img src="{{ asset('assets/imgs/paymentValidations') }}/{{$order->payment_image}}" alt="{{$order->user->name}}" width="60"></td>
                                             <td>
                                                 Current status : {{$order->status}} <br>
-                                                @if ($order->status!="Done" && $order->status!="Order Rejected")
-                                                <form wire:submit.prevent="updateStatus">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="mb-3 mt-3">
-                                                            <p>Select Status:</p>
-                                                            @if ($order->status=="Waiting")
-                                                                <input type="radio" id="confirm . {{$order->id}}" name="status" value="In Progress" style="height: 20px" wire:model="status" wire:click="$set('order_id', {{$order->id}})"><br>
-                                                                <label for="confirm . {{$order->id}}">Confirm Payment</label><br>
-                                                                <input type="radio" id="reject . {{$order->id}}" name="status" value="Order Rejected" style="height: 20px" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
-                                                                <label for="reject . {{$order->id}}">Reject Order</label><br>
-                                                            @elseif ($order->status=="In Progress")
-                                                                <input type="radio" id="ready . {{$order->id}}" name="status" value="Ready to Pick Up" style="height: 20px" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
-                                                                <label for="ready . {{$order->id}}">Ready to Pick Up</label><br>
-                                                            @elseif ($order->status=="Ready to Pick Up")
-                                                                <input type="radio" id="done . {{$order->id}}" name="status" value="Done" style="height: 20px" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
-                                                                <label for="done . {{$order->id}}">Already Picked Up</label><br>
-                                                            @else
-                                                            @endif
-                                                            
-                                                            {{-- @foreach($options as $option)
-                                                                <input type="radio" id="{{$option . '_' . $order->id}}" name="status" value="{{$option}}" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
-                                                                <label for="{{$option . '_' . $order->id}}">{{$option}}</label><br>
-                                                            @endforeach --}}
-                                                            @error('status')
-                                                                <p class="text-danger">{{$message}} </p>
-                                                            @enderror
-                                                        </div>
-                                                        <!-- Use wire:model for the $order_id property -->
-                                                        <input type="hidden" wire:model="order_id">
-                                                        <button type="submit" class="btn float-end">Update</button>
-                                                    </div>
-                                                </form>
-                                                @elseif($order->status=="Order Rejected" && $order->reason=="")
-                                                <form wire:submit.prevent="addReason">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="mb-3 mt-3">
-                                                            <label for="reason . {{$order->id}}">Reason</label><br>
-                                                            <input type="text" id="reason . {{$order->id}}" name="reason" wire:model="reason">
-                                                            @error('reason')
-                                                                <p class="text-danger">{{$message}}</p>
-                                                            @enderror
-                                                        </div>
-                                                        <!-- Use wire:model for the $order_id property -->
-                                                        <input type="hidden" wire:model="order_id">
-                                                        <button type="submit" class="btn float-end">Submit</button>
-                                                    </div>
-                                                </form>
-                                                @elseif($order->status=="Order Rejected" && $order->reason!="")
-                                                Reason : {{$order->reason}}
-                                                @else
-                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

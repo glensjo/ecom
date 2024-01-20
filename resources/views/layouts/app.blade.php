@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{asset ('assets/css/main.css') }}">
 <link rel="stylesheet" href="{{asset ('assets/css/custom.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css" rel="stylesheet">
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="2d928d3a-5d93-4b59-8dc3-088f6568f3c8";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 @livewireStyles
 </head>
 
@@ -92,19 +93,17 @@
                             <nav>
                                 <ul>
                                     <li><a href="/">Home </a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="{{ route('shop') }}">Shop</a></li>
-                                    <li><a href="blog.html">Blog </a></li>                                    
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{{ route('shop') }}">Shop</a></li>                       
+                                    <li><a href="{{ route('contact') }}">Contact</a></li>
                                     @auth                                        
                                         @if (Auth::user()->utype == 'ADM')
-                                                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                                <li><a href="{{ route('admin.products') }}">Products</a></li>
-                                                <li><a href="{{ route('admin.categories') }}">Categories</a></li>
-                                                <li><a href="#">Orders</a></li>
-                                                <li><a href="#">Customers</a></li> 
+                                            {{-- <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
+                                            <li><a href="{{ route('admin.products') }}">Products</a></li>
+                                            <li><a href="{{ route('admin.categories') }}">Categories</a></li>
+                                            <li><a href="{{ route('admin.orders') }}">Orders</a></li>
+                                            <li><a href="{{ route('admin.report') }}">Reports</a></li> 
                                         @else
-                                                <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>                                                
+                                            <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>                                                
                                         @endif 
                                     @endauth 
                                 </ul>
@@ -192,10 +191,7 @@
                         <div class="single-mobile-header-info">                        
                             <a href="{{ route('register') }}">Sign Up</a>
                         </div>
-                    @endif                    
-                    <div class="single-mobile-header-info">
-                        <a href="#">(+1) 0000-000-000 </a>
-                    </div>
+                    @endif
                 </div>
                 <div class="mobile-social-icon">
                     <h5 class="mb-15 text-grey-4">Follow Us</h5>
@@ -218,9 +214,6 @@
                                 <img class="icon-email" src="{{ asset('assets/imgs/theme/icons/icon-email.svg') }}" alt="">
                                 <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
                             </div>
-                            <div class="col my-4 my-md-0 des">
-                                <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first shopping.</strong></h5>
-                            </div>
                         </div>
                     </div>
                     <div class="col-lg-5">
@@ -237,17 +230,17 @@
         <section class="section-padding footer-mid">
             <div class="container pt-15 pb-20">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
+                                <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                             </div>
-                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact Us</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Address: </strong>Toko Bangunan Pusaka / Konveksi,
-                                Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2,
-                                Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan,
-                                Daerah Khusus Ibukota Jakarta 12320
+                                <strong>Address: </strong>Toko Bangunan Pusaka / Konveksi, <br>
+                                Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2, <br>
+                                Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan, <br>
+                                Daerah Khusus Ibukota Jakarta 12320 
                             </p>
                             <p class="wow fadeIn animated">
                                 <strong>Phone: </strong>+62 852-8157-3272
@@ -277,7 +270,7 @@
                 </div>
                 <div class="col-lg-6">
                     <p class="text-lg-end text-start font-sm text-muted mb-0">
-                        &copy; <strong class="text-brand">SurfsideMedia</strong> All rights reserved
+                        &copy; <strong class="text-brand">Cigem Creative, Glenda Jocelyn</strong> All rights reserved
                     </p>
                 </div>
             </div>
