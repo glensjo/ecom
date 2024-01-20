@@ -32,7 +32,7 @@ class AdminAddProductComponent extends Component
             "slug"=> "required",
             "short_description"=> "required",
             "description"=> "required",
-            "regular_price"=> 'required|numeric|min:1',,
+            "regular_price"=> 'required|numeric|min:1',
             "image"=> "required",
             "category_id"=> "required"
         ]);
