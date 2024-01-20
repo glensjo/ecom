@@ -19,6 +19,7 @@ use App\Livewire\HomeComponent;
 use App\Livewire\SearchComponent;
 use App\Livewire\ShopComponent;
 use App\Livewire\User\UserDashboardComponent;
+use App\Livewire\User\UserReportComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +59,7 @@ Route::get("/contact", ContactComponent::class)->name("contact");
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
+    Route::get('/user/report', UserReportComponent::class)->name('user.report');
 });
 
 Route::middleware(['auth','authadmin'])->group(function () {

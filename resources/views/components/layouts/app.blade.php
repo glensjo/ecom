@@ -103,7 +103,8 @@
                                             <li><a href="{{ route('admin.orders') }}">Orders</a></li>
                                             <li><a href="{{ route('admin.report') }}">Reports</a></li> 
                                         @else
-                                            <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>                                                
+                                            <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                                            <li><a href="{{ route('user.report') }}">Report</a></li>                                                 
                                         @endif 
                                     @endauth 
                                 </ul>
