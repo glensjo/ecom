@@ -26,7 +26,7 @@
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
-                        <ul>
+                            <ul>
                                 <li>
                                     <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>                                    
                                 </li>                                
@@ -93,7 +93,7 @@
                             <nav>
                                 <ul>
                                     <li><a href="/">Home </a></li>
-                                    <li><a href="{{ route('shop') }}">Shop</a></li>                       
+                                    <li><a href="{{ route('shop') }}">Products</a></li>                       
                                     <li><a href="{{ route('contact') }}">Contact</a></li>
                                     @auth                                        
                                         @if (Auth::user()->utype == 'ADM')
@@ -103,7 +103,7 @@
                                             <li><a href="{{ route('admin.orders') }}">Orders</a></li>
                                             <li><a href="{{ route('admin.report') }}">Reports</a></li> 
                                         @else
-                                            <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                                            <li><a href="{{ route('user.dashboard') }}">Your Orders</a></li>
                                             <li><a href="{{ route('user.report') }}">Report</a></li>                                                 
                                         @endif 
                                     @endauth 
@@ -206,7 +206,7 @@
     {{$slot}}
 
     <footer class="main">
-        <section class="newsletter p-30 text-white wow fadeIn animated">
+        {{-- <section class="newsletter p-30 text-white wow fadeIn animated">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-7 mb-md-3 mb-lg-0">
@@ -227,8 +227,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="section-padding footer-mid">
+        </section> --}}
+        <section class="newsletter p-30 text-white wow fadeIn animated">
             <div class="container pt-15 pb-20">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -251,8 +251,7 @@
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">                                
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>                                
+                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt="https://www.instagram.com/cigemcreative"></a>                           
                             </div>
                         </div>
                     </div>

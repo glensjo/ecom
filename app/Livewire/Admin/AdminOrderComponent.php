@@ -9,7 +9,6 @@ use Livewire\WithPagination;
 class AdminOrderComponent extends Component
 {
     use WithPagination;
-    public $orders;
     public $order_id, $status, $reason;
 
     public function updateStatus()
@@ -37,7 +36,7 @@ class AdminOrderComponent extends Component
 
     public function render()
     {
-        $this->orders = Order::get();
-        return view('livewire.admin.admin-order-component');
+        $orders = Order::orderBy('created_at','ASC')->paginate(5);
+        return view('livewire.admin.admin-order-component', ['orders'=> $orders]);
     }
 }

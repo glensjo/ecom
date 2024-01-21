@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="/" rel="nofollow">Home</a>
-                    <span></span> Shop
+                    <span></span> Products
                 </div>
             </div>
         </div>

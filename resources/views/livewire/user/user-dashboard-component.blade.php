@@ -3,7 +3,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="/" rel="nofollow">Home</a>
-                <span></span> Dashboard
+                <span></span> Your Orders
             </div>
         </div>
     </div>
