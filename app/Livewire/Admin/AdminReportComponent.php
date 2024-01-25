@@ -147,10 +147,10 @@ class AdminReportComponent extends Component
                 $this->total = $this->sub_total + $this->tax;
             }
             else
-            session()->flash('message','No transactions record!');
-        
+            session()->flash('message','No transactions detected!');
+
         else
-            $orders = Order::where(['user_id'=>auth()->user()->id])->orderBy('created_at','ASC')->paginate(5);
+            session()->flash('message','You are not Admin!');
 
         $output->writeln($orders);
 

@@ -18,7 +18,16 @@
                                     <div class="padding_eight_all bg-white">
                                         <div class="heading_s1">
                                             <h3 class="mb-30">Create an Account</h3>
-                                        </div>                                        
+                                        </div>
+                                        @if($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach($errors->all() as $item)
+                                                <li>{{ $item }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif                                        
                                         <form method="POST" action="{{ route('register.process') }}">
                                             @csrf
                                             <div class="form-group">
