@@ -36,7 +36,7 @@
                                             <div class="form-group">
                                                 <input required="" type="password" name="password" placeholder="Password" required autocomplete="current-password">
                                             </div>
-                                            <div class="login_footer form-group">
+                                            {{-- <div class="login_footer form-group">
                                                 <div class="chek-form">
                                                     <div class="custome-checkbox">
                                                         <input class="form-check-input" type="checkbox" name="remember" id="exampleCheckbox1" value="">
@@ -44,7 +44,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="text-muted" href="{{ route('password.request') }}">Forgot password?</a>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
                                             </div>
@@ -55,6 +55,7 @@
                             <div class="col-lg-1"></div>
                             <div class="col-lg-6">
                                <img src="assets/imgs/login.png">
+                               {{-- <img src="assets/imgs/in.jpg"> --}}
                             </div>
                         </div>
                     </div>
