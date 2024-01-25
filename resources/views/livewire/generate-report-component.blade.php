@@ -186,7 +186,7 @@
 
 <body>
 <div class="web-container">  
-<table class="invoice-info-container">
+{{-- <table class="invoice-info-container">
     <tr>
     <td rowspan="2" class="client-name">User Name : {{auth()->user()->name}}</td>
     <td class="client-name"><strong>Cigem Creative</strong></td>
@@ -258,7 +258,7 @@
         <td class="large total">Rp {{ number_format($order->total, 3, '.', '.') }} </td>
     </tr>
     </tbody>
-</table>
+</table> --}}
 
 <div class="footer">
     <div class="footer-info">
@@ -267,7 +267,6 @@
     <span>useanvil.com</span>
     </div>
     <div class="footer-thanks">
-    <img src="https://github.com/anvilco/html-pdf-invoice-template/raw/main/img/heart.png" alt="heart">
     <span>Thank you!</span>
     </div>
 </div>

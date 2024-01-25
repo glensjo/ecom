@@ -28,9 +28,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form wire:submit.prevent='generateReport'>
-                                <button type="submit">Generate</button>
-                            </form>
+                            <button wire:click="generatePDF">Generate PDF</button>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
