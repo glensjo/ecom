@@ -5,6 +5,8 @@ namespace App\Livewire\Admin;
 use App\Models\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AdminOrderComponent extends Component
 {
@@ -13,6 +15,10 @@ class AdminOrderComponent extends Component
 
     public function updateStatus()
     {
+        $output = new ConsoleOutput();
+        $output->writeln($this->order_id);
+        $output->writeln($this->status);
+        
         $this->validate([
             "status"=> "required"
         ]);
@@ -29,7 +35,6 @@ class AdminOrderComponent extends Component
         ]);
         $orderr = Order::find($this->order_id);
         $orderr->reason = $this->reason;
-        // dd( $order->reason);
         $orderr->save();
         session()->flash('message','Reason has been added!');
     }

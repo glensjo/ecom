@@ -74,21 +74,22 @@
                                                             <p>Select Status:</p>
                                                             @if ($order->status=="Waiting")
                                                                 <div class="d-flex flex-row">
-                                                                    <input type="radio" id="confirm . {{$order->id}}" name="status" value="In Progress" style="height: 20px; width: 30px" wire:model="status" wire:click="$set('order_id', {{$order->id}})"><br>
+                                                                    <input type="radio" id="confirm . {{$order->id}}" value="In Progress" style="height: 20px; width: 30px" wire:model="status" ><br>
                                                                     <label for="confirm . {{$order->id}}">Confirm Payment</label><br>
                                                                 </div>
                                                                 <div class="d-flex flex-row">
-                                                                    <input type="radio" id="reject . {{$order->id}}" name="status" value="Order Rejected" style="height: 20px; width: 30px" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
+                                                                    <input type="radio" id="reject . {{$order->id}}" value="Order Rejected" style="height: 20px; width: 30px" wire:model="status" >
                                                                     <label for="reject . {{$order->id}}">Reject Order</label><br>
                                                                 </div>
                                                             @elseif ($order->status=="In Progress")
                                                                 <div class="d-flex flex-row">
-                                                                    <input type="radio" id="ready . {{$order->id}}" name="status" value="Ready to Pick Up" style="height: 20px; width: 30px" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
+                                                                    {{$order->id}}
+                                                                    <input type="radio" id="ready . {{$order->id}}" value="Ready to Pick Up" style="height: 20px; width: 30px" wire:model="status" >
                                                                     <label for="ready . {{$order->id}}">Ready to Pick Up</label><br>
                                                                 </div>
                                                             @elseif ($order->status=="Ready to Pick Up")
                                                                 <div class="d-flex flex-row">
-                                                                    <input type="radio" id="done . {{$order->id}}" name="status" value="Done" style="height: 20px; width: 30px" wire:model="status" wire:click="$set('order_id', {{$order->id}})">
+                                                                    <input type="radio" id="done . {{$order->id}}" value="Done" style="height: 20px; width: 30px" wire:model="status" >
                                                                     <label for="done . {{$order->id}}">Already Picked Up</label><br>
                                                                 </div>
                                                             @else
@@ -99,7 +100,7 @@
                                                         </div>
                                                         <!-- Use wire:model for the $order_id property -->
                                                         <input type="hidden" wire:model="order_id">
-                                                        <button type="submit" class="btn float-end">Update</button>
+                                                        <button type="submit" class="btn float-end" wire:click="$set('order_id', {{$order->id}})" >Update</button>
                                                     </div>
                                                 </form>
                                                 @elseif($order->status=="Order Rejected" && $order->reason=="")

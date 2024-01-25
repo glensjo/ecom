@@ -11,7 +11,7 @@
         <section class="pt-150 pb-150">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-10 m-auto">
+                    <div class="col-lg-12 m-auto">
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
@@ -52,10 +52,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-6">
-                               <img src="assets/imgs/login.png">
+                            <div class="col-lg-7">
+                               {{-- <img src="assets/imgs/login.png"> --}}
                                {{-- <img src="assets/imgs/in.jpg"> --}}
+                               {{-- <img src="assets/imgs/in.png"> --}}
+                               <img src="assets/imgs/log.png">
                             </div>
                         </div>
                     </div>

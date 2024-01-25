@@ -11,9 +11,9 @@
         <section class="pt-150 pb-150">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-10 m-auto">
+                    <div class="col-lg-12 m-auto">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                             <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
                                     <div class="padding_eight_all bg-white">
                                         <div class="heading_s1">
@@ -50,9 +50,9 @@
                                     </div>
                                 </div>
                             </div>                            
-                            <div class="col-lg-6">
-                               <img src="assets/imgs/login.png">
-                            </div>
+                            <div class="col-lg-7">
+                                <img src="assets/imgs/log.png">
+                             </div>
                         </div>
                     </div>
                 </div>

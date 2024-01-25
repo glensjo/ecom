@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Invoice Template</title>
+<title>Invoice</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 
@@ -185,21 +185,28 @@
 
 <body>
 <div class="web-container">  
-{{-- <table class="invoice-info-container">
+<table class="invoice-info-container">
     <tr>
-    <td rowspan="2" class="client-name">User Name : {{auth()->user()->name}}</td>
+    <td class="client-name">User Name :</td>
+    {{-- <td rowspan="2" class="client-name"><img src="https://cigemcreative.com/img/assets/logo%20cigem%20hitam.png" alt="Logo Cigem"></td> --}}
     <td class="client-name"><strong>Cigem Creative</strong></td>
     </tr>
     <tr>
+    <td class="client-name"><strong>{{auth()->user()->name}}</strong></td>
     <td>
-        Toko Bangunan Pusaka / Konveksi, Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2 <br>
-        Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta, 12320
+        Toko Bangunan Pusaka / Konveksi, <br>
+        Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2 <br>
+        Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan, <br>
+         Daerah Khusus Ibukota Jakarta, 12320
     </td>
     </tr>
     <tr>
     <td>
         Invoice Date: <strong>May 24th, 2024</strong>
-    </td><td></td>
+    </td>
+    <td>
+        Phone :  +62 852-8157-3272
+    </td>
     </tr>
     <tr>
     <td>
@@ -208,13 +215,14 @@
     <td>cigem.creative@gmail.com</td>
     </tr>
 </table>
+@if (auth()->user()->utype=='USR' )
 
 <table class="line-items-container">
     <thead>
         <tr class="table-primary">   
             <th class="text-center" style="width: 3%">#</th>
             <th class="text-center" style="width: 17%">Product Name</th>
-            <th class="text-center">Design</th>
+            {{-- <th class="text-center">Design</th> --}}
             <th class="text-center" style="width: 35%">Custom Description</th>
             <th class="text-center" style="width: 5%">Size</th>
             <th class="text-center" style="width: 5%">Qty</th>
@@ -226,7 +234,7 @@
             <tr>
                 <td class="text-center">{{$loop->iteration}} </td>
                 <td class="text">{{$order->product->name}} </td>
-                <td class="text-center"><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->user->name}}" width="60"></td>
+                {{-- <td class="text-center"><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->user->name}}" width="60"></td> --}}
                 <td class="text-center">{{$order->custom_description}} </td>
                 <td class="text-center">{{$order->size}} </td>
                 <td class="text-center">{{$order->qty}} </td>
@@ -240,30 +248,84 @@
     </tbody>
 </table>
 
+<table class="line-items-container has-bottom-border" style="align-items: right">
+    <thead>
+        <tr>
+            <th>Subtotal</th>
+            <th>Tax</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="large">Rp {{ number_format($sub_total, 3, '.', '.') }}
+            </td>
+            <td class="large">Rp {{ number_format($tax, 3, '.', '.') }}</td>
+            <td class="large total">Rp {{ number_format($total, 3, '.', '.') }} </td>
+        </tr>
+    </tbody>
+</table>
+
+@else
+<table class="line-items-container">
+    <thead>
+        <tr class="table-primary">   
+            <th class="text-center" style="width: 3%">#</th>
+            <th class="text-center">User Name</th>
+            <th class="text-center" style="width: 17%">Product Name</th>
+            {{-- <th class="text-center">Design</th> --}}
+            <th class="text-center" style="width: 35%">Custom Description</th>
+            <th class="text-center" style="width: 5%">Size</th>
+            <th class="text-center" style="width: 5%">Qty</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($orders as $order)
+            <tr>
+                <td class="text-center">{{$loop->iteration}} </td>
+                <td class="text">{{$order->user->name}} </td>
+                <td class="text">{{$order->product->name}} </td>
+                {{-- <td class="text-center"><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->user->name}}" width="60"></td> --}}
+                <td class="text-center">{{$order->custom_description}} </td>
+                <td class="text-center">{{$order->size}} </td>
+                <td class="text-center">{{$order->qty}} </td>
+                <td class="text-center">Rp {{ number_format($order->product->regular_price * $order->qty, 3, '.', '.') }} </td>
+                <td class="text-center bold">{{$order->status}}<br>                                                
+                    @if($order->status=="Order Rejected" && $order->reason!="")
+                    Reason : {{$order->reason}}
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 
 <table class="line-items-container has-bottom-border" style="align-items: right">
     <thead>
-    <tr>
-        <th>Subtotal</th>
-        <th>Tax</th>
-        <th>Total</th>
-    </tr>
+        <tr>
+            <th>Subtotal</th>
+            <th>Tax</th>
+            <th>Total</th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td class="large">Rp {{ number_format($order->subtotal, 3, '.', '.') }}
-        </td>
-        <td class="large">Rp {{ number_format($order->tax, 3, '.', '.') }}</td>
-        <td class="large total">Rp {{ number_format($order->total, 3, '.', '.') }} </td>
-    </tr>
+        <tr>
+            <td class="large">Rp {{ number_format($sub_total, 3, '.', '.') }}
+            </td>
+            <td class="large">Rp {{ number_format($tax, 3, '.', '.') }}</td>
+            <td class="large total">Rp {{ number_format($total, 3, '.', '.') }} </td>
+        </tr>
     </tbody>
-</table> --}}
+</table>
+@endif
 
 <div class="footer">
     <div class="footer-info">
-    <span>hello@useanvil.com</span> |
+    <span>cigem.creative@gmail.com</span> |
     <span>555 444 6666</span> |
-    <span>useanvil.com</span>
+    {{-- <span>useanvil.com</span> --}}
     </div>
     <div class="footer-thanks">
     <span>Thank you!</span>

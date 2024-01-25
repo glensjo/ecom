@@ -28,45 +28,31 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <button wire:click="generatePDF">Generate PDF</button>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Product Name</th>
-                                        <th>Design</th>
-                                        <th style="width: 15%">Custom Description</th>
-                                        <th>Size</th>
-                                        <th>Quantity</th>
-                                        <th>Payment</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $i = ($orders->currentPage()-1)*$orders->perPage();
-                                    @endphp
-                                    @foreach ($orders as $order)
-                                        <tr>
-                                            {{-- <td>{{$order->user->name}} </td> --}}
-                                            <td>{{++$i}} </td>
-                                            <td>{{$order->product->name}} </td>
-                                            <td><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->user->name}}" width="60"></td>
-                                            <td>{{$order->custom_description}} </td>
-                                            <td>{{$order->size}} </td>
-                                            <td>{{$order->qty}} </td>
-                                            <td><img src="{{ asset('assets/imgs/paymentValidations') }}/{{$order->payment_image}}" alt="{{$order->user->name}}" width="60"></td>
-                                            <td>
-                                                Current status : {{$order->status}} <br>
-                                                @if($order->status=="Order Rejected" && $order->reason!="")
-                                                Reason : {{$order->reason}}
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{$orders->links()}}
+                            @if (Session::has('message'))
+                                <div class="alert alert-warning" role="alert">{{Session::get('message')}} </div>
+                            @endif
+                            <form wire:submit.prevent="generatePDF">
+                                @csrf
+                                <div class="form-group col-md-3">
+                                    <label for="inputTanggal">Start Date</label>
+                                    <input type="date" class="form-control" wire:model="startdate">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputTanggal">End Date</label>
+                                    <input type="date" class="form-control" wire:model="enddate">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputCategory">Category</label>
+                                    <select wire:model="category_id" class="form-control">
+                                        <option value="">Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button class="button">Generate Report</button>
+                                {{-- <button wire:click="generatePDF">Generate PDF</button> --}}
+                            </form>                            
                         </div>
                     </div>
                 </div>

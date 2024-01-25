@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Order;
 use Livewire\Component;
 
 class GenerateReportComponent extends Component
