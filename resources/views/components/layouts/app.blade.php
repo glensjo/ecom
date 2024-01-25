@@ -94,7 +94,7 @@
                                 <ul>
                                     <li><a href="/">Home </a></li>
                                     <li><a href="{{ route('shop') }}">Products</a></li>                       
-                                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                                    <li><a href="{{ route('contact') }}">Contact Us</a></li>
                                     @auth                                        
                                         @if (Auth::user()->utype == 'ADM')
                                             {{-- <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
@@ -104,7 +104,7 @@
                                             <li><a href="{{ route('admin.report') }}">Reports</a></li> 
                                         @else
                                             <li><a href="{{ route('user.dashboard') }}">Your Orders</a></li>
-                                            <li><a href="{{ route('user.report') }}">Report</a></li>                                                 
+                                            <li><a href="{{ route('user.report') }}">Reports</a></li>                                                 
                                         @endif 
                                     @endauth 
                                 </ul>
@@ -143,8 +143,8 @@
             </div>
             <div class="mobile-header-content-area">
                 <div class="mobile-search search-style-3 mobile-header-border">
-                    <form action="#">
-                        <input type="text" placeholder="Search for items…">
+                    <form action="{{ route('product.search') }}">                                
+                        <input type="text" name="q" placeholder="Search for items...">
                         <button type="submit"><i class="fi-rs-search"></i></button>
                     </form>
                 </div>
@@ -152,23 +152,17 @@
                     <nav>
                         <ul class="mobile-menu">
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('shop') }}">Shop</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog.html">Blog</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">German</a></li>
-                                    <li><a href="#">Spanish</a></li>
-                                </ul>
-                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('shop') }}">Products</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('contact') }}">Contact Us</a></li>
                             @auth                                        
                                 @if (Auth::user()->utype == 'ADM')
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.products') }}">Products</a></li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.categories') }}">Categories</a></li>                                    
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.categories') }}">Categories</a></li> 
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.orders') }}">Orders</a></li>    
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.report') }}">Reports</a></li>                                   
                                 @else
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('user.dashboard') }}">Dashboard</a></li>                                                                             
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('user.dashboard') }}">Dashboard</a></li>  
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('user.report') }}">Reports</a></li>                                                                              
                                 @endif 
                             @endauth 
                         </ul>
@@ -176,7 +170,7 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a href="contact.html"> Our location </a>
+                        <a href="{{ route('contact') }}"> Our location </a>
                     </div>
                     @auth
                         <div class="single-mobile-header-info">
@@ -196,8 +190,7 @@
                 </div>
                 <div class="mobile-social-icon">
                     <h5 class="mb-15 text-grey-4">Follow Us</h5>
-                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
-                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>
+                    <a href="https://www.instagram.com/cigemcreative"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt="Instagram Cigem"></a>
                 </div>
             </div>
         </div>
@@ -251,7 +244,7 @@
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">                                
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt="https://www.instagram.com/cigemcreative"></a>                           
+                                <a href="https://www.instagram.com/cigemcreative"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt="Instagram Cigem"></a>                           
                             </div>
                         </div>
                     </div>
@@ -262,11 +255,6 @@
             <div class="row">
                 <div class="col-12 mb-20">
                     <div class="footer-bottom"></div>
-                </div>
-                <div class="col-lg-6">
-                    <p class="float-md-left font-sm text-muted mb-0">
-                        <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a>
-                    </p>
                 </div>
                 <div class="col-lg-6">
                     <p class="text-lg-end text-start font-sm text-muted mb-0">
