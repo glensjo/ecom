@@ -23,7 +23,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    On Going Orders
+                                    Manage Orders
                                 </div>
                                 <div class="col-md-6">
                                     {{-- <a href="{{ route('admin.history') }}" class="btn btn-success float-end">See Completed Orders</a> --}}
@@ -83,7 +83,6 @@
                                                                 </div>
                                                             @elseif ($order->status=="In Progress")
                                                                 <div class="d-flex flex-row">
-                                                                    {{$order->id}}
                                                                     <input type="radio" id="ready . {{$order->id}}" value="Ready to Pick Up" style="height: 20px; width: 30px" wire:model="status" >
                                                                     <label for="ready . {{$order->id}}">Ready to Pick Up</label><br>
                                                                 </div>

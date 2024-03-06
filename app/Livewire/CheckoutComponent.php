@@ -50,7 +50,7 @@ class CheckoutComponent extends Component
         }
 
         session()->flash('success_message','Order Placement');
-        return $this->redirect('/user/dashboard');
+        return $this->redirect('/user/orders');
     }
 
     public function render()

@@ -40,22 +40,22 @@
                                                 <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
                                             </div>
                                         </form> --}}
-                                        <form wire:submit.prevent="">
+                                        <form action="mailto:s31200085@student.ubm.ac.id" method="post" enctype="text/plain">
                                             <div class="mb-3 mt-3">
-                                                <label for="name" class="form-label">Name</label>
-                                                <input type="text" name="name" class="form-control" placeholder="Name">
+                                                <label for="sname" class="form-label">Name</label>
+                                                <input type="text" name="sname" class="form-control" placeholder="Name" required>
                                             </div>
                                             <div class="mb-3 mt-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" name="email" class="form-control" placeholder="Email">
+                                                <label for="semail" class="form-label">Email</label>
+                                                <input type="email" name="semail" class="form-control" placeholder="Email" required>
                                             </div>
                                             <div class="mb-3 mt-3">
-                                                <label for="subject" class="form-label">Subject</label>
-                                                <input type="text" name="subject" class="form-control" placeholder="Subject">
+                                                <label for="ssubject" class="form-label">Subject</label>
+                                                <input type="text" name="ssubject" class="form-control" placeholder="Subject" required>
                                             </div>
                                             <div class="mb-3 mt-3">
-                                                <label for="message" class="form-label">Message</label>
-                                                <textarea name="message" class="form-control" cols="40" rows="3" placeholder="Message"></textarea>
+                                                <label for="smessage" class="form-label">Message</label>
+                                                <textarea name="smessage" class="form-control" cols="40" rows="3" placeholder="Message" required></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-primary float-end">Send Message</button>
                                         </form>

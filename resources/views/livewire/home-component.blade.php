@@ -7,11 +7,10 @@
                         <div class="row align-items-center slider-animated-1">
                             <div class="col-lg-5 col-md-6">
                                 <div class="hero-slider-content-2">
-                                    <h4 class="animated">Trade-in offer</h4>
-                                    <h2 class="animated fw-900">Supper value deals</h2>
-                                    <h1 class="animated fw-900 text-brand">On all products</h1>
-                                    <p class="animated">Save more with coupons & up to 70% off</p>
-                                    <a class="animated btn btn-brush btn-brush-3" href="product-details.html"> Shop Now </a>
+                                    <h2 class="animated fw-900">Stand Out,</h2>
+                                    <h1 class="animated fw-900 text-brand">Make Memories Last!</h1>
+                                    <p class="animated">Order Your Custom Merchandise from the Finest Convection Service.</p>
+                                    <a class="animated btn btn-brush btn-brush-3" href="{{ route('shop') }}"> Shop Now </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">
@@ -27,11 +26,10 @@
                         <div class="row align-items-center slider-animated-1">
                             <div class="col-lg-5 col-md-6">
                                 <div class="hero-slider-content-2">
-                                    <h4 class="animated">Hot promotions</h4>
-                                    <h2 class="animated fw-900">Fashion Trending</h2>
-                                    <h1 class="animated fw-900 text-7">Great Collection</h1>
-                                    <p class="animated">Save more with coupons & up to 20% off</p>
-                                    <a class="animated btn btn-brush btn-brush-2" href="product-details.html"> Discover Now </a>
+                                    <h2 class="animated fw-900">From Concept</h2>
+                                    <h1 class="animated fw-900 text-7">to Creation!</h1>
+                                    <p class="animated">Order Your Unique Merchandise Now and Bring Your Vision to Life!</p>
+                                    <a class="animated btn btn-brush btn-brush-2" href="{{ route('shop') }}"> Discover Now </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">

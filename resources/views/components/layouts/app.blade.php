@@ -98,7 +98,7 @@
                                     @auth                                        
                                         @if (Auth::user()->utype == 'ADM')
                                             {{-- <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
-                                            <li><a href="{{ route('admin.products') }}">Products</a></li>
+                                            <li><a href="{{ route('admin.products') }}">Manage Products</a></li>
                                             <li><a href="{{ route('admin.categories') }}">Categories</a></li>
                                             <li><a href="{{ route('admin.orders') }}">Orders</a></li>
                                             <li><a href="{{ route('admin.report') }}">Reports</a></li> 
@@ -156,7 +156,7 @@
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('contact') }}">Contact Us</a></li>
                             @auth                                        
                                 @if (Auth::user()->utype == 'ADM')
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.products') }}">Products</a></li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.products') }}">Manage Products</a></li>
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.categories') }}">Categories</a></li> 
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.orders') }}">Orders</a></li>    
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.report') }}">Reports</a></li>                                   
@@ -253,11 +253,8 @@
         </section>
         <div class="container pb-20 wow fadeIn animated mob-center">
             <div class="row">
-                <div class="col-12 mb-20">
-                    <div class="footer-bottom"></div>
-                </div>
-                <div class="col-lg-6">
-                    <p class="text-lg-end text-start font-sm text-muted mb-0">
+                <div class="col-md-12 text-center">
+                    <p class="font-sm text-muted mb-0">
                         &copy; <strong class="text-brand">Cigem Creative, Glenda Jocelyn</strong> All rights reserved
                     </p>
                 </div>
