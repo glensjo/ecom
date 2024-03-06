@@ -66,6 +66,7 @@ class AdminEditProductComponent extends Component
         $product->category_id = $this->category_id;
         $product->save();
         session()->flash('message','Product has been updated!');
+        return redirect()->route('admin.products');
     }
 
     public function render()

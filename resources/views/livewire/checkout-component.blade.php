@@ -66,28 +66,33 @@
                                 <div class="mb-25">
                                     <h5>Payment</h5>
                                 </div>
-                                <form wire:submit.prevent="placeOrder">
-                                    @csrf
-                                    <div class="mb-3 mt-3">
-                                        <label for="company" class="form-label">Company Name (optional)</label>
-                                        <input type="text" name="company" class="form-control" placeholder="Your Company Name" wire:model="company">
-                                        @error('company')
-                                            <p class="text-danger">{{$message}} </p>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <label for="payment_image" class="form-label">Upload your payment</label>
-                                        <input type="file" name="payment_image" class="form-control" wire:model="payment_image">
-                                        @if ($payment_image)
-                                            <img src="{{$payment_image->temporaryUrl()}}" width="120">
-                                        @endif
-                                        @error('payment_image')
-                                            <p class="text-danger">{{$message}} </p>
-                                        @enderror
-                                    </div>
-                                    <button type="submit" class="button button-add-to-cart float-end">Pay and Order</button>
-                                </form>
-                                *Please contact us if you need help.
+                                @if (Auth::user()->utype == 'USR')
+                                    <form wire:submit.prevent="placeOrder">
+                                        @csrf
+                                        <div class="mb-3 mt-3">
+                                            <label for="company" class="form-label">Company Name (optional)</label>
+                                            <input type="text" name="company" class="form-control" placeholder="Your Company Name" wire:model="company">
+                                            @error('company')
+                                                <p class="text-danger">{{$message}} </p>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3 mt-3">
+                                            <label for="payment_image" class="form-label">Upload your payment</label>
+                                            <input type="file" name="payment_image" class="form-control" wire:model="payment_image">
+                                            @if ($payment_image)
+                                                <img src="{{$payment_image->temporaryUrl()}}" width="120">
+                                            @endif
+                                            @error('payment_image')
+                                                <p class="text-danger">{{$message}} </p>
+                                            @enderror
+                                        </div>
+                                        <button type="submit" class="button button-add-to-cart float-end">Pay and Order</button>
+                                    </form>
+                                    *Please contact us if you need help.
+                                    
+                                @else
+                                    You are admin, cannot checkout !!!
+                                @endif
                             </div>
                         </div>
                     </div>
