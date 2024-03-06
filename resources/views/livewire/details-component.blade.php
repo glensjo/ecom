@@ -93,7 +93,11 @@
                                                 @enderror
                                             </div>
                                             @auth                                        
-                                                <button type="submit" class="button button-add-to-cart float-end">Add to cart</button>
+                                                @if (Auth::user()->utype == 'ADM')
+                                                    You are ADMIN !!!
+                                                @else                                        
+                                                    <button type="submit" class="button button-add-to-cart float-end">Add to cart</button>
+                                                @endif
                                             @else
                                                 <button type="button" class="button button-add-to-cart float-end" onclick="location.href='/login'">Add to cart</button>
                                             @endauth

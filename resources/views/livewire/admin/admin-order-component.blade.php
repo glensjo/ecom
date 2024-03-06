@@ -74,7 +74,7 @@
                                                             <p>Select Status:</p>
                                                             @if ($order->status=="Waiting")
                                                                 <div class="d-flex flex-row">
-                                                                    <input type="radio" id="confirm . {{$order->id}}" value="In Progress" style="height: 20px; width: 30px" wire:model="status" ><br>
+                                                                    <input type="radio" id="confirm . {{$order->id}}" value="In Progress" style="height: 20px; width: 30px" wire:model="status" >
                                                                     <label for="confirm . {{$order->id}}">Confirm Payment</label><br>
                                                                 </div>
                                                                 <div class="d-flex flex-row">

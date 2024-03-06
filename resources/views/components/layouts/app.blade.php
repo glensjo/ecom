@@ -99,8 +99,8 @@
                                         @if (Auth::user()->utype == 'ADM')
                                             {{-- <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
                                             <li><a href="{{ route('admin.products') }}">Manage Products</a></li>
-                                            <li><a href="{{ route('admin.categories') }}">Categories</a></li>
-                                            <li><a href="{{ route('admin.orders') }}">Orders</a></li>
+                                            <li><a href="{{ route('admin.categories') }}">Manage Categories</a></li>
+                                            <li><a href="{{ route('admin.orders') }}">Manage Orders</a></li>
                                             <li><a href="{{ route('admin.report') }}">Reports</a></li> 
                                         @else
                                             <li><a href="{{ route('user.dashboard') }}">Your Orders</a></li>
@@ -157,8 +157,8 @@
                             @auth                                        
                                 @if (Auth::user()->utype == 'ADM')
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.products') }}">Manage Products</a></li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.categories') }}">Categories</a></li> 
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.orders') }}">Orders</a></li>    
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.categories') }}">Manage Categories</a></li> 
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.orders') }}"> Manage Orders</a></li>    
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('admin.report') }}">Reports</a></li>                                   
                                 @else
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('user.dashboard') }}">Dashboard</a></li>  

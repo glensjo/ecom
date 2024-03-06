@@ -69,7 +69,11 @@
                                     </tr>
                                 </tbody>
                                 @else
-                                    <p>No item in cart</p>
+                                    @if (Auth::user()->utype == 'ADM')
+                                        You are ADMIN !!!
+                                    @else 
+                                        <p>No item in cart</p>
+                                    @endif      
                                 @endif
                             </table>
                         </div>
