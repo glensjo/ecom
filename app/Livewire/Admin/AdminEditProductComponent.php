@@ -64,9 +64,16 @@ class AdminEditProductComponent extends Component
             $product->image = $imageName;
         }
         $product->category_id = $this->category_id;
-        $product->save();
-        session()->flash('message','Product has been updated!');
-        return redirect()->route('admin.products');
+        $length = strlen($product->short_description);
+        if($length >= 253) {
+            session()->flash('alert','Failed Updated!!! Short Description is too long!!');
+            return redirect()->route('admin.products');
+        }
+        else {
+            $product->save();
+            session()->flash('message','Product has been updated!');
+            return redirect()->route('admin.products');
+        }
     }
 
     public function render()
