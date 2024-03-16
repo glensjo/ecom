@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Transaction;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -21,6 +22,17 @@ class CheckoutComponent extends Component
         $this->validate([
             'payment_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048' // Adjust the max size as neede
         ]);
+
+        $trans = new Transaction();
+        $trans->company = $this->company;
+        $trans->subtotal = $this->sub_total;
+        $trans->tax = $this->tax;
+        $trans->total = $this->total;
+        $imageName = auth()->user()->id.'.'.$this->payment_image->getClientOriginalName();
+        $this->payment_image->storeAs('paymentValidations', $imageName);
+        $trans->payment_image = $imageName;
+        $trans->user_id=auth()->user()->id;
+        $trans->save();
         
         foreach ($itemcart as $item) {
             $order= new Order();
@@ -28,25 +40,15 @@ class CheckoutComponent extends Component
             $order->qty=$item->qty;
             $order->custom_description=$item->custom_description;
             $order->design_image = $item->design_image;
-            $order->company = $this->company;
-            $order->subtotal = $this->sub_total;
-            // dd($order->company);
-            $order->tax = $this->tax;
-            $order->total = $this->total;
-            $imageName = auth()->user()->id.'.'.$this->payment_image->getClientOriginalName();
-            $this->payment_image->storeAs('paymentValidations', $imageName);
-            $order->payment_image = $imageName;
             $order->status = "Waiting";
             $order->product_id=$item->product->id;
-            $order->user_id=auth()->user()->id;
-            $order->save();
+            $order->transaction_id=$trans->id;
+            $order->save();            
         }
 
-        $cart = Cart::with('product')
-                ->where(['user_id'=>auth()->user()->id])
-                ->get();
-        foreach ($cart as $item) {
-            $item->delete();            
+        // Clear the user's cart after placing the order
+        foreach ($itemcart as $item) {
+            $item->delete();
         }
 
         session()->flash('success_message','Order Placement');

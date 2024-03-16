@@ -56,14 +56,14 @@
                                     @foreach ($orders as $order)
                                         <tr>
                                             <td>{{++$i}} </td>
-                                            <td>{{$order->user->name}} </td>
+                                            <td>{{$order->transaction->user->name}} </td>
                                             <td>{{$order->product->name}} </td>
-                                            <td><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->user->name}}" width="60"></td>
+                                            <td><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->transaction->user->name}}" width="60"></td>
                                             <td>{{$order->custom_description}} </td>
                                             <td>{{$order->size}} </td>
                                             <td>{{$order->qty}} </td>
-                                            <td>Rp {{ number_format($order->total, 3, '.', '.') }} </td>
-                                            <td><img src="{{ asset('assets/imgs/paymentValidations') }}/{{$order->payment_image}}" alt="{{$order->user->name}}" width="60"></td>
+                                            <td>Rp {{ number_format($order->transaction->total, 3, '.', '.') }} </td>
+                                            <td><img src="{{ asset('assets/imgs/paymentValidations') }}/{{$order->transaction->payment_image}}" alt="{{$order->transaction->user->name}}" width="60"></td>
                                             <td>
                                                 Current status : {{$order->status}} <br>
                                                 @if ($order->status!="Done" && $order->status!="Order Rejected")

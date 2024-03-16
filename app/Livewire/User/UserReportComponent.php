@@ -4,6 +4,7 @@ namespace App\Livewire\User;
 
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Transaction;
 use Livewire\Component;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -26,7 +27,7 @@ class UserReportComponent extends Component
         if (auth()->user()->utype=='USR') 
             //semua kosong
             if($startdate=='' && $enddate=='' && $category_id=='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])->orderBy('created_at','ASC')->paginate();
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])->orderBy('created_at','ASC')->paginate();
                 foreach($orders as $item) 
                 {
                     $this->sub_total += $item->product->regular_price * $item->qty;
@@ -36,7 +37,7 @@ class UserReportComponent extends Component
             }
             //ada start date
             elseif($startdate!='' && $enddate=='' && $category_id=='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])
                         ->where('created_at', 'LIKE', '%' . $startdate . '%')
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
@@ -49,7 +50,7 @@ class UserReportComponent extends Component
             }
             //ada end date
             elseif($startdate=='' && $enddate!='' && $category_id=='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])
                         ->where('created_at', 'LIKE', '%' . $enddate . '%')
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
@@ -62,7 +63,7 @@ class UserReportComponent extends Component
             }
             //ada category
             elseif($startdate=='' && $enddate=='' && $category_id!='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])
                         ->join('products', 'orders.product_id', '=', 'products.id')
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
@@ -76,7 +77,7 @@ class UserReportComponent extends Component
             }
             //ada start date and end date
             elseif($startdate!='' && $enddate!='' && $category_id=='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])
                         ->whereBetween('created_at', [$startdate, $enddate])
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
@@ -89,7 +90,7 @@ class UserReportComponent extends Component
             }
             //ada start date and category
             elseif($startdate!='' && $enddate=='' && $category_id!='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])
                         ->where('orders.created_at', 'LIKE', '%' . $startdate . '%')
                         ->join('products', 'orders.product_id', '=', 'products.id')
                         ->where('products.category_id', $category_id)
@@ -104,7 +105,7 @@ class UserReportComponent extends Component
             }
             //ada end date and category
             elseif($startdate=='' && $enddate!='' && $category_id!='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])
                         ->where('orders.created_at',  'LIKE', '%' . $enddate . '%')
                         ->join('products', 'orders.product_id', '=', 'products.id')
                         ->where('products.category_id', $category_id)
@@ -119,7 +120,7 @@ class UserReportComponent extends Component
             }
             //ada start date, end date, category
             elseif($startdate!='' && $enddate!='' && $category_id!='') {
-                $orders = Order::where(['user_id'=>auth()->user()->id])
+                $orders = Transaction::where(['user_id'=>auth()->user()->id])
                         ->whereBetween('orders.created_at', [$startdate, $enddate])
                         ->join('products', 'orders.product_id', '=', 'products.id')
                         ->where('products.category_id', $category_id)

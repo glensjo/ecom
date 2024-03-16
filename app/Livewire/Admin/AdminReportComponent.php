@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Transaction;
 use Livewire\Component;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -14,18 +15,6 @@ class AdminReportComponent extends Component
     public $startdate, $enddate, $category_id;
     public $sub_total=0, $tax=0, $total=0;
 
-    // public function generatePDF()
-    // {
-    //     // return redirect()->route('generate');
-    //     // if (auth()->user()->utype=='ADM')
-    //     // $orders = Order::orderBy('created_at','ASC')->paginate(5);
-    //     // else
-    //     // $orders = Order::where(['user_id'=>auth()->user()->id])->orderBy('created_at','ASC')->paginate(5);
-    //     $htmlContent = view('livewire.generate-report-component')->render(); // Replace with your view
-
-    //     $pdf = SnappyPdf::loadHTML($htmlContent);
-    //     return $pdf->download('document.pdf');
-    // }
     public function render()
     {
         $categories = Category::orderBy("name","ASC")->get();
@@ -46,7 +35,7 @@ class AdminReportComponent extends Component
         if (auth()->user()->utype=='ADM') 
             //semua kosong
             if($startdate=='' && $enddate=='' && $category_id=='') {
-                $orders = Order::orderBy('created_at','ASC')->paginate();
+                $orders = Transaction::orderBy('created_at','ASC')->paginate();
                 foreach($orders as $item) 
                 {
                     $this->sub_total += $item->product->regular_price * $item->qty;
@@ -56,7 +45,7 @@ class AdminReportComponent extends Component
             }
             //ada start date
             elseif($startdate!='' && $enddate=='' && $category_id=='') {
-                $orders = Order::where('created_at', 'LIKE', '%' . $startdate . '%')
+                $orders = Transaction::where('created_at', 'LIKE', '%' . $startdate . '%')
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
                 foreach($orders as $item) 
@@ -68,7 +57,7 @@ class AdminReportComponent extends Component
             }
             //ada end date
             elseif($startdate=='' && $enddate!='' && $category_id=='') {
-                $orders = Order::where('created_at', 'LIKE', '%' . $enddate . '%')
+                $orders = Transaction::where('created_at', 'LIKE', '%' . $enddate . '%')
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
                 foreach($orders as $item) 
@@ -80,7 +69,7 @@ class AdminReportComponent extends Component
             }
             //ada category
             elseif($startdate=='' && $enddate=='' && $category_id!='') {
-                $orders = Order::join('products', 'orders.product_id', '=', 'products.id')
+                $orders = Transaction::join('products', 'orders.product_id', '=', 'products.id')
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
                         ->paginate();
@@ -93,7 +82,7 @@ class AdminReportComponent extends Component
             }
             //ada start date and end date
             elseif($startdate!='' && $enddate!='' && $category_id=='') {
-                $orders = Order::whereBetween('created_at', [$startdate, $enddate])
+                $orders = Transaction::whereBetween('created_at', [$startdate, $enddate])
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
                 foreach($orders as $item) 
@@ -105,7 +94,7 @@ class AdminReportComponent extends Component
             }
             //ada start date and category
             elseif($startdate!='' && $enddate=='' && $category_id!='') {
-                $orders = Order::where('orders.created_at', 'LIKE', '%' . $startdate . '%')
+                $orders = Transaction::where('orders.created_at', 'LIKE', '%' . $startdate . '%')
                         ->join('products', 'orders.product_id', '=', 'products.id')
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
@@ -119,7 +108,7 @@ class AdminReportComponent extends Component
             }
             //ada end date and category
             elseif($startdate=='' && $enddate!='' && $category_id!='') {
-                $orders = Order::where('orders.created_at',  'LIKE', '%' . $enddate . '%')
+                $orders = Transaction::where('orders.created_at',  'LIKE', '%' . $enddate . '%')
                         ->join('products', 'orders.product_id', '=', 'products.id')
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
@@ -133,7 +122,7 @@ class AdminReportComponent extends Component
             }
             //ada start date, end date, category
             elseif($startdate!='' && $enddate!='' && $category_id!='') {
-                $orders = Order::whereBetween('orders.created_at', [$startdate, $enddate])
+                $orders = Transaction::whereBetween('orders.created_at', [$startdate, $enddate])
                     ->join('products', 'orders.product_id', '=', 'products.id')
                     ->where('products.category_id', $category_id)
                     ->orderBy('orders.created_at', 'ASC')
