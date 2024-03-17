@@ -48,7 +48,7 @@
     font-size: 0.875em;
     }
     .invoice-info-container td {
-    padding: 4px 0;
+    padding: 2px 0;
     }
     
     .client-name {
@@ -210,15 +210,23 @@
         <td>
             Invoice Date: <strong>{{ $transaction->created_at}} </strong>
         </td>
-        <td>
-            Phone :  +62 852-8157-3272
-        </td>
+        <td>Phone :  +62 852-8157-3272 </td>
         </tr>
         <tr>
         <td>
             Invoice No: <strong>{{ $transaction->id }} </strong>
         </td>
         <td>cigem.creative@gmail.com</td>
+        </tr>
+        <tr>
+        <td>
+            Payment Detail: <strong>{{ $transaction->bank_name }} - {{ $transaction->account_number }} </strong>
+        </td>
+        <td></td>
+        </tr>
+        <tr>
+        <td> </td>
+        <td><h1> P A I D </h1></td>
         </tr>
     </table>
 
@@ -233,6 +241,8 @@
     @endif
     Invoice Date: <strong>{{ $transaction->created_at}} </strong><br>
     Invoice No: <strong>{{ $transaction->id }} </strong>
+    Payment Detail: <strong>{{ $transaction->bank_name }} - {{ $transaction->account_number }} </strong> 
+
 @endif
 
 <table class="line-items-container">
@@ -287,7 +297,7 @@
 <div class="footer">
     <div class="footer-info">
     <span>cigem.creative@gmail.com</span> |
-    <span>555 444 6666</span> |
+    <span>555 444 6666</span>  |
     </div>
     <div class="footer-thanks">
     <span>Thank you!</span>

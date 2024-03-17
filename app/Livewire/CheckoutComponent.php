@@ -12,7 +12,7 @@ class CheckoutComponent extends Component
 {
     use WithFileUploads;
     public $carts, $sub_total = 0, $total = 0, $tax = 0;
-    public $payment_image, $status, $company;
+    public $payment_image, $status, $company, $bank_name, $account_number;
 
     public function placeOrder()
     {
@@ -20,11 +20,15 @@ class CheckoutComponent extends Component
                 ->where(['user_id'=>auth()->user()->id])
                 ->get();
         $this->validate([
-            'payment_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048' // Adjust the max size as neede
+            'payment_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'bank_name' => 'required',
+            'account_number' => 'required'
         ]);
 
         $trans = new Transaction();
         $trans->company = $this->company;
+        $trans->bank_name = $this->bank_name;
+        $trans->account_number = $this->account_number;
         $trans->subtotal = $this->sub_total;
         $trans->tax = $this->tax;
         $trans->total = $this->total;

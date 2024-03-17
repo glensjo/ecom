@@ -77,6 +77,20 @@
                                             @enderror
                                         </div>
                                         <div class="mb-3 mt-3">
+                                            <label for="bank_name" class="form-label">Bank Name</label>
+                                            <input type="text" name="bank_name" class="form-control" placeholder="Your Bank Name" wire:model="bank_name">
+                                            @error('bank_name')
+                                                <p class="text-danger">{{$message}} </p>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3 mt-3">
+                                            <label for="account_number" class="form-label">Account Number</label>
+                                            <input type="text" name="account_number" class="form-control" placeholder="Your Account Number" wire:model="account_number">
+                                            @error('account_number')
+                                                <p class="text-danger">{{$message}} </p>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3 mt-3">
                                             <label for="payment_image" class="form-label">Upload your payment</label>
                                             <input type="file" name="payment_image" class="form-control" wire:model="payment_image">
                                             @if ($payment_image)
