@@ -18,10 +18,12 @@ return new class extends Migration
             $table->decimal('tax',8,3);
             $table->decimal('total',8,3);
             $table->string('company')->nullable();
+            $table->string('bank_name');
+            $table->string('account_number');
             $table->string('payment_image');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });            
+        });
     }
 
     /**
