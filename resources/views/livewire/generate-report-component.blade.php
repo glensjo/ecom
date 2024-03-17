@@ -185,96 +185,62 @@
 
 <body>
 <div class="web-container">  
-<table class="invoice-info-container">
-    <tr>
-    <td class="client-name">User Name :</td>
-    {{-- <td rowspan="2" class="client-name"><img src="https://cigemcreative.com/img/assets/logo%20cigem%20hitam.png" alt="Logo Cigem"></td> --}}
-    <td class="client-name"><strong>Cigem Creative</strong></td>
-    </tr>
-    <tr>
-    <td class="client-name"><strong>{{auth()->user()->name}}</strong></td>
-    <td>
-        Toko Bangunan Pusaka / Konveksi, <br>
-        Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2 <br>
-        Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan, <br>
-         Daerah Khusus Ibukota Jakarta, 12320
-    </td>
-    </tr>
-    <tr>
-    <td>
-        Invoice Date: <strong>May 24th, 2024</strong>
-    </td>
-    <td>
-        Phone :  +62 852-8157-3272
-    </td>
-    </tr>
-    <tr>
-    <td>
-        Invoice No: <strong>12345</strong>
-    </td>
-    <td>cigem.creative@gmail.com</td>
-    </tr>
-</table>
 @if (auth()->user()->utype=='USR' )
 
-<table class="line-items-container">
-    <thead>
-        <tr class="table-primary">   
-            <th class="text-center" style="width: 3%">#</th>
-            <th class="text-center" style="width: 17%">Product Name</th>
-            {{-- <th class="text-center">Design</th> --}}
-            <th class="text-center" style="width: 35%">Custom Description</th>
-            <th class="text-center" style="width: 5%">Size</th>
-            <th class="text-center" style="width: 5%">Qty</th>
-            <th class="text-center">Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($orders as $order)
-            <tr>
-                <td class="text-center">{{$loop->iteration}} </td>
-                <td class="text">{{$order->product->name}} </td>
-                {{-- <td class="text-center"><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->user->name}}" width="60"></td> --}}
-                <td class="text-center">{{$order->custom_description}} </td>
-                <td class="text-center">{{$order->size}} </td>
-                <td class="text-center">{{$order->qty}} </td>
-                <td class="text-center bold">{{$order->status}}<br>                                                
-                    @if($order->status=="Order Rejected" && $order->reason!="")
-                    Reason : {{$order->reason}}
-                    @endif
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-
-<table class="line-items-container has-bottom-border" style="align-items: right">
-    <thead>
+    <table class="invoice-info-container">
         <tr>
-            <th>Subtotal</th>
-            <th>Tax</th>
-            <th>Total</th>
+        <td class="client-name">Company / Customer :</td>
+        {{-- <td rowspan="2" class="client-name"><img src="https://cigemcreative.com/img/assets/logo%20cigem%20hitam.png" alt="Logo Cigem"></td> --}}
+        <td class="client-name"><strong>Cigem Creative</strong></td>
         </tr>
-    </thead>
-    <tbody>
         <tr>
-            <td class="large">Rp {{ number_format($sub_total, 3, '.', '.') }}
-            </td>
-            <td class="large">Rp {{ number_format($tax, 3, '.', '.') }}</td>
-            <td class="large total">Rp {{ number_format($total, 3, '.', '.') }} </td>
+            @if ($transaction->company !== '')
+                <td class="client-name"><strong>{{ $transaction->company }}</strong></td>
+            @else
+                <td class="client-name"><strong>{{ $transaction->user->name }}</strong></td>
+            @endif
+        <td>
+            Toko Bangunan Pusaka / Konveksi, <br>
+            Jl. Bintaro Permai Gang Samping No.56, RT.4/RW.2 <br>
+            Pesanggrahan, Kec. Pesanggrahan, Kota Jakarta Selatan, <br>
+            Daerah Khusus Ibukota Jakarta, 12320
+        </td>
         </tr>
-    </tbody>
-</table>
+        <tr>
+        <td>
+            Invoice Date: <strong>{{ $transaction->created_at}} </strong>
+        </td>
+        <td>
+            Phone :  +62 852-8157-3272
+        </td>
+        </tr>
+        <tr>
+        <td>
+            Invoice No: <strong>{{ $transaction->id }} </strong>
+        </td>
+        <td>cigem.creative@gmail.com</td>
+        </tr>
+    </table>
 
 @else
+
+    <h1>! ADMIN REPORT !</h1>
+    <div class="client-name">Company / Customer : </div>
+    @if ($transaction->company !== '')
+        <div class="client-name"><strong>{{ $transaction->company }}</strong></div><br>
+    @else
+        <div class="client-name"><strong>{{ $transaction->user->name }}</strong></div><br>
+    @endif
+    Invoice Date: <strong>{{ $transaction->created_at}} </strong><br>
+    Invoice No: <strong>{{ $transaction->id }} </strong>
+@endif
+
 <table class="line-items-container">
     <thead>
         <tr class="table-primary">   
-            <th class="text-center" style="width: 3%">#</th>
-            <th class="text-center">User Name</th>
-            <th class="text-center" style="width: 17%">Product Name</th>
-            {{-- <th class="text-center">Design</th> --}}
-            <th class="text-center" style="width: 35%">Custom Description</th>
+            <th class="text-center" style="width: 3%">#</th> |
+            <th class="text-center" >Product Name</th> |
+            <th class="text-center" >Custom Description</th> |
             <th class="text-center" style="width: 5%">Size</th>
             <th class="text-center" style="width: 5%">Qty</th>
             <th class="text-center">Price</th>
@@ -285,13 +251,12 @@
         @foreach ($orders as $order)
             <tr>
                 <td class="text-center">{{$loop->iteration}} </td>
-                <td class="text">{{$order->user->name}} </td>
                 <td class="text">{{$order->product->name}} </td>
                 {{-- <td class="text-center"><img src="{{ asset('assets/imgs/designs') }}/{{$order->design_image}}" alt="{{$order->user->name}}" width="60"></td> --}}
                 <td class="text-center">{{$order->custom_description}} </td>
                 <td class="text-center">{{$order->size}} </td>
                 <td class="text-center">{{$order->qty}} </td>
-                <td class="text-center">Rp {{ number_format($order->product->regular_price * $order->qty, 3, '.', '.') }} </td>
+                <td class="text-center">Rp {{ number_format($order->product->regular_price, 3, '.', '.') }} </td>
                 <td class="text-center bold">{{$order->status}}<br>                                                
                     @if($order->status=="Order Rejected" && $order->reason!="")
                     Reason : {{$order->reason}}
@@ -312,27 +277,21 @@
     </thead>
     <tbody>
         <tr>
-            <td class="large">Rp {{ number_format($sub_total, 3, '.', '.') }}
-            </td>
-            <td class="large">Rp {{ number_format($tax, 3, '.', '.') }}</td>
-            <td class="large total">Rp {{ number_format($total, 3, '.', '.') }} </td>
+            <td class="large">Rp {{ number_format($transaction->subtotal, 3, '.', '.') }}</td>
+            <td class="large">Rp {{ number_format($transaction->tax, 3, '.', '.') }}</td>
+            <td class="large total">Rp {{ number_format($transaction->total, 3, '.', '.') }} </td>
         </tr>
     </tbody>
 </table>
-@endif
 
 <div class="footer">
     <div class="footer-info">
     <span>cigem.creative@gmail.com</span> |
     <span>555 444 6666</span> |
-    {{-- <span>useanvil.com</span> --}}
     </div>
     <div class="footer-thanks">
     <span>Thank you!</span>
     </div>
 </div>
-
 </div>
-
-
 </body></html>

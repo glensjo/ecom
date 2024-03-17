@@ -13,27 +13,16 @@ class UserReportComponent extends Component
 {
     public $startdate, $enddate, $category_id;
     public $sub_total=0, $tax=0, $total=0;
-    public function generatePDF()
+    public function filter()
     {
-        $output = new ConsoleOutput();
-
         $startdate = $this->startdate;
         $enddate = $this->enddate;
         $category_id = $this->category_id;
-        $this->total = 0;
-        $this->tax = 0;
-        $this->sub_total = 0;
 
         if (auth()->user()->utype=='USR') 
             //semua kosong
             if($startdate=='' && $enddate=='' && $category_id=='') {
                 $orders = Transaction::where(['user_id'=>auth()->user()->id])->orderBy('created_at','ASC')->paginate();
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             //ada start date
             elseif($startdate!='' && $enddate=='' && $category_id=='') {
@@ -41,12 +30,6 @@ class UserReportComponent extends Component
                         ->where('created_at', 'LIKE', '%' . $startdate . '%')
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             //ada end date
             elseif($startdate=='' && $enddate!='' && $category_id=='') {
@@ -54,12 +37,6 @@ class UserReportComponent extends Component
                         ->where('created_at', 'LIKE', '%' . $enddate . '%')
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             //ada category
             elseif($startdate=='' && $enddate=='' && $category_id!='') {
@@ -68,12 +45,6 @@ class UserReportComponent extends Component
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
                         ->paginate();
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             //ada start date and end date
             elseif($startdate!='' && $enddate!='' && $category_id=='') {
@@ -81,12 +52,6 @@ class UserReportComponent extends Component
                         ->whereBetween('created_at', [$startdate, $enddate])
                         ->orderBy('created_at', 'ASC')
                         ->paginate();
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             //ada start date and category
             elseif($startdate!='' && $enddate=='' && $category_id!='') {
@@ -96,12 +61,6 @@ class UserReportComponent extends Component
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
                         ->paginate();
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             //ada end date and category
             elseif($startdate=='' && $enddate!='' && $category_id!='') {
@@ -111,12 +70,6 @@ class UserReportComponent extends Component
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
                         ->paginate();
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             //ada start date, end date, category
             elseif($startdate!='' && $enddate!='' && $category_id!='') {
@@ -126,24 +79,25 @@ class UserReportComponent extends Component
                         ->where('products.category_id', $category_id)
                         ->orderBy('orders.created_at', 'ASC')
                         ->paginate();
-
-                foreach($orders as $item) 
-                {
-                    $this->sub_total += $item->product->regular_price * $item->qty;
-                }
-                $this->tax = $this->sub_total * 0.1;
-                $this->total = $this->sub_total + $this->tax;
             }
             else
             session()->flash('message','No transactions detected!');
 
         else
             session()->flash('message','You are Admin!');
+    }
 
-        $output->writeln($orders);
+    public function generatePDF($transactionId)
+    {
+        // $output = new ConsoleOutput();
+
+        $transaction = Transaction::findOrFail($transactionId);
+        $orders = Order::where('transaction_id', $transactionId)->get();
+
+        // $output->writeln($orders);
 
         if ($orders->count() > 0) {
-            $pdf = PDF::loadView('livewire.generate-report-component', ['orders'=> $orders, 'sub_total' => $this->sub_total, 'tax' => $this->tax, 'total' => $this->total]);
+            $pdf = PDF::loadView('livewire.generate-report-component', ['orders'=> $orders, 'transaction' => $transaction]);
             return response()->streamDownload(function () use ($pdf) {
                 echo $pdf->stream();
                 }, 'invoice.pdf');
@@ -155,6 +109,21 @@ class UserReportComponent extends Component
     public function render()
     {
         $categories = Category::orderBy("name","ASC")->get();
-        return view('livewire.user.user-report-component', compact('categories'));
+
+        $transactions = Transaction::where(['user_id' => auth()->user()->id])
+        ->with('orders') 
+        ->get();
+
+        // Filter transactions where all orders are not marked as "Done"
+        $transactions = $transactions->filter(function ($transaction) {
+            foreach ($transaction->orders as $order) {
+                if ($order->status === 'Done') {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        return view('livewire.user.user-report-component', compact('categories', 'transactions'));
     }
 }

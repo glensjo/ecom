@@ -41,9 +41,9 @@ class AdminOrderComponent extends Component
 
     public function render()
     {
-        $orders = Order::with('transaction')->get();
-        $orders = Order::orderBy('created_at','ASC')->paginate(5);
-
+        // $orders = Order::with('transaction')->get();
+        // $orders = Order::orderBy('created_at','ASC')->paginate(5);
+        $orders = Order::where('status', '!=', 'Done')->with('transaction')->orderBy('created_at', 'ASC')->paginate(5);
         return view('livewire.admin.admin-order-component', ['orders'=> $orders]);
     }
 }

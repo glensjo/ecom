@@ -31,7 +31,7 @@
                             @if (Session::has('message'))
                                 <div class="alert alert-warning" role="alert">{{Session::get('message')}} </div>
                             @endif
-                            <form wire:submit.prevent="generatePDF">
+                            <form wire:submit.prevent="filter">
                                 @csrf
                                 <div class="form-group col-md-3">
                                     <label for="inputTanggal">Start Date</label>
@@ -51,10 +51,46 @@
                                     </select>
                                 </div>
                                 <button class="button">Generate Report</button>
-                                {{-- <button wire:click="generatePDF">Generate PDF</button> --}}
-                            </form>                            
+                            </form>                   
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    @if ($transactions->count() > 0)
+                        <div class="mb-20">
+                            <h4>Your Orders</h4>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table shopping-summery text-center clean">  
+                                        <thead>
+                                            <tr class="main-heading">
+                                                <th scope="col">Transaction ID</th>
+                                                <th scope="col">Company</th> 
+                                                <th scope="col">Order Date</th>
+                                                <th scope="col">Report</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                
+                                            @foreach($transactions as $transaction)
+                                                <tr>
+                                                    <td>{{ $transaction->id }}</td>
+                                                    <td>{{ $transaction->company }}</td>
+                                                    <td>{{ $transaction->created_at }}</td>
+                                                    <td><button wire:click="generatePDF({{ $transaction->id }})">Download</button></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <span> No transaction found! </span>
+                    @endif
                 </div>
             </div>
         </section>
